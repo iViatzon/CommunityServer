@@ -33,7 +33,6 @@ using ASC.Mail.Extensions;
 
 using MailKit;
 using MailKit.Net.Imap;
-using MailKit.Net.Pop3;
 using MailKit.Net.Smtp;
 using MailKit.Search;
 using MailKit.Security;
@@ -42,7 +41,6 @@ using MimeKit;
 
 using AuthenticationException = MailKit.Security.AuthenticationException;
 using MailFolder = ASC.Mail.Data.Contracts.MailFolder;
-using Pop3Client = MailKit.Net.Pop3.Pop3Client;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace ASC.Mail.Clients
@@ -53,7 +51,6 @@ namespace ASC.Mail.Clients
         public ILog Log { get; set; }
 
         public ImapClient Imap { get; private set; }
-        public Pop3Client Pop { get; private set; }
         public SmtpClient Smtp { get; private set; }
 
         public bool IsConnected { get; private set; }
@@ -131,30 +128,13 @@ namespace ASC.Mail.Clients
 
             CancelToken = CancellationTokenSource.CreateLinkedTokenSource(cancelToken, StopTokenSource.Token).Token;
 
-            if (Account.Imap)
+            Imap = new ImapClient(protocolLogger)
             {
-                Imap = new ImapClient(protocolLogger)
-                {
-                    Timeout = tcpTimeout
-                };
+                Timeout = tcpTimeout
+            };
 
-                if (certificatePermit)
-                    Imap.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
-
-                Pop = null;
-            }
-            else
-            {
-                Pop = new Pop3Client(protocolLogger)
-                {
-                    Timeout = tcpTimeout
-                };
-
-                if (certificatePermit)
-                    Pop.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
-
-                Imap = null;
-            }
+            if (certificatePermit)
+                Imap.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
 
             if (skipSmtp)
             {
@@ -197,60 +177,31 @@ namespace ASC.Mail.Clients
             if (string.IsNullOrEmpty(uidl))
                 throw new ArgumentNullException("uidl");
 
-            if (Account.Imap)
-            {
-                if (!Imap.IsAuthenticated)
-                    LoginImap();
+            if (!Imap.IsAuthenticated)
+                LoginImap();
 
-                var elements = uidl.Split('-');
+            var elements = uidl.Split('-');
 
-                var index = Convert.ToInt32(elements[0]);
-                var folderId = Convert.ToInt32(elements[1]);
+            var index = Convert.ToInt32(elements[0]);
+            var folderId = Convert.ToInt32(elements[1]);
 
-                if (folderId != (int)FolderType.Inbox)
-                    throw new ArgumentException("uidl is invalid. Only INBOX folder is supported.");
+            if (folderId != (int)FolderType.Inbox)
+                throw new ArgumentException("uidl is invalid. Only INBOX folder is supported.");
 
-                var inbox = Imap.Inbox;
+            var inbox = Imap.Inbox;
 
-                inbox.Open(FolderAccess.ReadOnly);
+            inbox.Open(FolderAccess.ReadOnly);
 
-                var allUids = (Imap.Capabilities & ImapCapabilities.ESearch) != 0
-                    ? inbox.Search(SearchOptions.All, SearchQuery.All, CancelToken).UniqueIds
-                    : inbox.Fetch(0, -1, MessageSummaryItems.UniqueId, CancelToken).Select(r => r.UniqueId).ToList();
+            var allUids = (Imap.Capabilities & ImapCapabilities.ESearch) != 0
+                ? inbox.Search(SearchOptions.All, SearchQuery.All, CancelToken).UniqueIds
+                : inbox.Fetch(0, -1, MessageSummaryItems.UniqueId, CancelToken).Select(r => r.UniqueId).ToList();
 
-                var uid = allUids.FirstOrDefault(u => u.Id == index);
+            var uid = allUids.FirstOrDefault(u => u.Id == index);
 
-                if (!uid.IsValid)
-                    throw new Exception("IMAP4 uidl not found");
+            if (!uid.IsValid)
+                throw new Exception("IMAP4 uidl not found");
 
-                return Imap.Inbox.GetMessage(uid, CancelToken);
-            }
-            else
-            {
-                if (!Pop.IsAuthenticated)
-                    LoginPop3();
-
-                var i = 0;
-                var uidls =
-                    Pop.GetMessageUids(CancelToken)
-                        .Select(u => new KeyValuePair<int, string>(i++, u))
-                        .ToDictionary(t => t.Key, t => t.Value);
-
-                var uid = uidls.FirstOrDefault(u => u.Value.Equals(uidl, StringComparison.OrdinalIgnoreCase));
-
-                if (uid.Value == null)
-                    throw new Exception("POP3 uidl not found");
-
-                return Pop.GetMessage(uid.Key, CancelToken);
-            }
-        }
-
-        public void Aggregate(TasksConfig tasksConfig, int limitMessages = -1)
-        {
-            if (Account.Imap)
-                AggregateImap(tasksConfig, limitMessages);
-            else
-                AggregatePop3(limitMessages);
+            return Imap.Inbox.GetMessage(uid, CancelToken);
         }
 
         public void Send(MimeMessage message, bool needCopyToSentFolder = true)
@@ -260,10 +211,8 @@ namespace ASC.Mail.Clients
 
             Smtp.Send(message, CancelToken);
 
-            if (!Account.Imap || !needCopyToSentFolder)
-                return;
-
-            AppendCopyToSentFolder(message);
+            if (needCopyToSentFolder)
+                AppendCopyToSentFolder(message);
         }
 
         public void Cancel()
@@ -289,20 +238,6 @@ namespace ASC.Mail.Clients
                         }
 
                         Imap.Dispose();
-                    }
-                }
-
-                if (Pop != null)
-                {
-                    lock (Pop.SyncRoot)
-                    {
-                        if (Pop.IsConnected)
-                        {
-                            Log.Debug("Pop->Disconnect()");
-                            Pop.Disconnect(true, CancelToken);
-                        }
-
-                        Pop.Dispose();
                     }
                 }
 
@@ -336,37 +271,18 @@ namespace ASC.Mail.Clients
 
         public void LoginImapPop()
         {
-            if (Account.Imap)
-            {
-                if (!Imap.IsAuthenticated)
-                    LoginImap();
-            }
-            else
-            {
-                if (!Pop.IsAuthenticated)
-                    LoginPop3();
-            }
+            if (!Imap.IsAuthenticated)
+                LoginImap();
         }
 
         public LoginResult TestLogin()
         {
-            var result = new LoginResult
-            {
-                Imap = Account.Imap
-            };
+            var result = new LoginResult { }; // FIX:
 
             try
             {
-                if (Account.Imap)
-                {
-                    if (!Imap.IsAuthenticated)
-                        LoginImap(false);
-                }
-                else
-                {
-                    if (!Pop.IsAuthenticated)
-                        LoginPop3(false);
-                }
+                if (!Imap.IsAuthenticated)
+                    LoginImap(false);
 
                 result.IngoingSuccess = true;
             }
@@ -1082,9 +998,6 @@ namespace ASC.Mail.Clients
 
         private void AppendCopyToSentFolder(MimeMessage message)
         {
-            if (!Account.Imap)
-                throw new NotSupportedException("Only Imap is suppoted");
-
             if (message == null)
                 throw new ArgumentNullException("message");
 
@@ -1123,278 +1036,6 @@ namespace ASC.Mail.Clients
                 Log.ErrorFormat("AppendCopyToSenFolder(Mailbox: '{0}', Tenant: {1}, User: '{2}'): Exception:\r\n{3}\r\n",
                     Account.EMail.Address, Account.TenantId, Account.UserId, ex.ToString());
             }
-        }
-
-        #endregion
-
-        #region .POP3
-
-        private void LoginPop3(bool enableUtf8 = true)
-        {
-            var secureSocketOptions = SecureSocketOptions.Auto;
-            var sslProtocols = SslProtocols.Default;
-
-            switch (Account.Encryption)
-            {
-                case EncryptionType.StartTLS:
-                    secureSocketOptions = SecureSocketOptions.StartTlsWhenAvailable;
-                    sslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
-                    break;
-                case EncryptionType.SSL:
-                    secureSocketOptions = SecureSocketOptions.SslOnConnect;
-                    sslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
-                    break;
-                case EncryptionType.None:
-                    secureSocketOptions = SecureSocketOptions.None;
-                    sslProtocols = SslProtocols.None;
-                    break;
-            }
-
-            Log.InfoFormat("Pop3.Connect({0}:{1}, {2})", Account.Server, Account.Port,
-                Enum.GetName(typeof(SecureSocketOptions), secureSocketOptions));
-            try
-            {
-                Pop.SslProtocols = sslProtocols;
-
-                var t = Pop.ConnectAsync(Account.Server, Account.Port, secureSocketOptions, CancelToken);
-
-                if (!t.Wait(Defines.MailServerConnectionTimeout, CancelToken))
-                {
-                    Log.InfoFormat("Pop3: Failed connect: Timeout.");
-                    throw new TimeoutException("Pop.ConnectAsync timeout");
-                }
-                else
-                {
-                    IsConnected = true;
-                    Log.InfoFormat("Pop3: Successfull connection. Working on!");
-                }
-
-                if (enableUtf8 && (Pop.Capabilities & Pop3Capabilities.UTF8) != Pop3Capabilities.None)
-                {
-                    Log.Debug("Pop3.EnableUTF8");
-
-                    t = Pop.EnableUTF8Async(CancelToken);
-
-                    if (!t.Wait(Defines.MailServerEnableUtf8Timeout, CancelToken))
-                        throw new TimeoutException("Pop3.EnableUTF8Async timeout");
-                }
-
-                Pop.Authenticated += PopOnAuthenticated;
-
-                if (string.IsNullOrEmpty(Account.OAuthToken))
-                {
-                    Log.DebugFormat("Pop3.Authentication({0})", Account.Account);
-
-                    t = Pop.AuthenticateAsync(Account.Account, Account.Password, CancelToken);
-                }
-                else
-                {
-                    Log.DebugFormat("Pop3.AuthenticationByOAuth({0})", Account.Account);
-
-                    var oauth2 = new SaslMechanismOAuth2(Account.Account, Account.AccessToken);
-
-                    t = Pop.AuthenticateAsync(oauth2, CancelToken);
-                }
-
-                if (!t.Wait(Defines.MailServerLoginTimeout, CancelToken))
-                {
-                    Pop.Authenticated -= PopOnAuthenticated;
-                    Log.InfoFormat("Pop3: Authentication failed.");
-                    throw new TimeoutException("Pop.AuthenticateAsync timeout");
-                }
-                else
-                {
-                    IsAuthenticated = true;
-                    Log.InfoFormat("Pop3: Successfull authentication.");
-                }
-
-                Pop.Authenticated -= PopOnAuthenticated;
-            }
-            catch (AggregateException aggEx)
-            {
-                if (aggEx.InnerException != null)
-                {
-                    Log.ErrorFormat($"Pop3: Exception while logging. See next exception for details.");
-                    throw aggEx.InnerException;
-                }
-                Log.ErrorFormat($"Pop3: Exception while logging.");
-                throw new Exception("LoginPop3 failed", aggEx);
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorFormat("LoginPop3 error {0}", ex.Message);
-                throw;
-            }
-        }
-
-        private void PopOnAuthenticated(object sender, AuthenticatedEventArgs authenticatedEventArgs)
-        {
-            OnAuthenticated(authenticatedEventArgs.Message);
-        }
-
-        public Func<Dictionary<int, string>, Dictionary<int, string>> FuncGetPop3NewMessagesIDs { get; set; }
-
-        private void AggregatePop3(int limitMessages = -1)
-        {
-            if (!Pop.IsAuthenticated)
-                LoginPop3();
-
-            var mailFolder = new MailFolder(FolderType.Inbox, "INBOX");
-
-            try
-            {
-                var loaded = 0;
-                var i = 0;
-                var uidls = Pop.GetMessageUids(CancelToken)
-                    .Select(uidl => new KeyValuePair<int, string>(i++, uidl))
-                    .ToDictionary(t => t.Key, t => t.Value);
-
-                if (!uidls.Any() || uidls.Count == Account.MessagesCount)
-                {
-                    Account.MessagesCount = uidls.Count;
-
-                    Log.Debug("New messages not found.\r\n");
-                    return;
-                }
-
-                var newMessages = FuncGetPop3NewMessagesIDs(uidls);
-
-                if (newMessages.Count == 0)
-                {
-                    Account.MessagesCount = uidls.Count;
-
-                    Log.Debug("New messages not found.\r\n");
-                    return;
-                }
-
-                Log.DebugFormat("Found {0} new messages.\r\n", newMessages.Count);
-
-                newMessages = FixPop3UidsOrder(newMessages);
-
-                var skipOnDate = Account.BeginDate != Defines.MinBeginDate;
-
-                foreach (var newMessage in newMessages)
-                {
-                    if (!Pop.IsConnected || CancelToken.IsCancellationRequested)
-                        break;
-
-                    Log.DebugFormat("Processing new message\tUID: {0}\tUIDL: {1}\t",
-                        newMessage.Key,
-                        newMessage.Value);
-
-                    try
-                    {
-                        var message = Pop.GetMessage(newMessage.Key, CancelToken);
-
-                        message.FixDateIssues(logger: Log);
-
-                        if (message.Date < Account.BeginDate && skipOnDate)
-                        {
-                            Log.DebugFormat("Skip message (Date = {0}) on BeginDate = {1}", message.Date,
-                                Account.BeginDate);
-                            continue;
-                        }
-
-                        message.FixEncodingIssues();
-
-                        OnGetMessage(message, newMessage.Value, true, mailFolder);
-
-                        loaded++;
-
-                        if (limitMessages <= 0 || loaded < limitMessages)
-                            continue;
-
-                        Log.Debug("Limit of max messages per session is exceeded!");
-                        break;
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        // Skip log error
-                    }
-                    catch (Exception e)
-                    {
-                        Log.ErrorFormat(
-                            "ProcessMessages() Tenant={0} User='{1}' Account='{2}', MailboxId={3}, MessageIndex={4}, UIDL='{5}' Exception:\r\n{6}\r\n",
-                            Account.TenantId, Account.UserId, Account.EMail.Address, Account.MailBoxId,
-                            newMessage.Key, newMessage.Value, e);
-
-                        if (e is IOException)
-                        {
-                            break; // stop checking other mailboxes
-                        }
-                    }
-                }
-
-                if (loaded < limitMessages)
-                {
-                    Account.MessagesCount = uidls.Count;
-                }
-            }
-            catch (AggregateException aggEx)
-            {
-                if (aggEx.InnerException != null)
-                {
-                    throw aggEx.InnerException;
-                }
-                throw new Exception("AggregatePop3 failed", aggEx);
-            }
-        }
-
-        private Dictionary<int, string> FixPop3UidsOrder(Dictionary<int, string> newMessages)
-        {
-            try
-            {
-                if (newMessages.Count < 2)
-                    return newMessages;
-
-                newMessages = newMessages
-                    .OrderBy(item => item.Key)
-                    .ToDictionary(id => id.Key, id => id.Value);
-
-                var fstIndex = newMessages.First().Key;
-                var lstIndex = newMessages.Last().Key;
-
-                var fstMailHeaders = Pop.GetMessageHeaders(fstIndex, CancelToken).ToList();
-                var lstMailHeaders = Pop.GetMessageHeaders(lstIndex, CancelToken).ToList();
-
-                var fstDateHeader =
-                    fstMailHeaders.FirstOrDefault(
-                        h => h.Field.Equals("Date", StringComparison.InvariantCultureIgnoreCase));
-
-                var lstDateHeader =
-                    lstMailHeaders.FirstOrDefault(
-                        h => h.Field.Equals("Date", StringComparison.InvariantCultureIgnoreCase));
-
-                DateTime fstDate;
-                DateTime lstDate;
-
-                if (fstDateHeader != null && DateTime.TryParse(fstDateHeader.Value, out fstDate) &&
-                    lstDateHeader != null &&
-                    DateTime.TryParse(lstDateHeader.Value, out lstDate))
-                {
-                    if (fstDate < lstDate)
-                    {
-                        Log.DebugFormat("Account '{0}' uids order is DESC", Account.EMail.Address);
-                        newMessages = newMessages
-                            .OrderByDescending(item => item.Key)
-                            .ToDictionary(id => id.Key, id => id.Value);
-                        return newMessages;
-                    }
-                }
-
-
-                Log.DebugFormat("Account '{0}' uids order is ASC", Account.EMail.Address);
-            }
-            catch (Exception)
-            {
-                newMessages = newMessages
-                    .OrderByDescending(item => item.Key)
-                    .ToDictionary(id => id.Key, id => id.Value);
-
-                Log.WarnFormat("Calculating order skipped! Account '{0}' uids order is DESC", Account.EMail.Address);
-            }
-
-            return newMessages;
         }
 
         #endregion

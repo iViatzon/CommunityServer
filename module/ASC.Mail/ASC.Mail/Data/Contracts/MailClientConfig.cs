@@ -300,7 +300,7 @@ namespace ASC.Mail.Data.Contracts
         public string Username { get; set; }
 
         [XmlAttribute("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } // NOTE: 'imap'
     }
 
     [GeneratedCode("System.Xml", "2.0.50727.3082")]

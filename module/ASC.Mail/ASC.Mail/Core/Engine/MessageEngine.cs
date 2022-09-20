@@ -1722,57 +1722,46 @@ namespace ASC.Mail.Core.Engine
                     return true;
                 }
 
-                if (mailbox.Imap)
+                if (tagsIds != null) // Add new tags to existing messages
                 {
-                    if (tagsIds != null) // Add new tags to existing messages
+                    using (var tx = daoFactory.DbManager.BeginTransaction())
                     {
-                        using (var tx = daoFactory.DbManager.BeginTransaction())
+                        if (tagsIds.Any(tagId => !engine.TagEngine.SetMessagesTag(daoFactory, idList, tagId)))
                         {
-                            if (tagsIds.Any(tagId => !engine.TagEngine.SetMessagesTag(daoFactory, idList, tagId)))
-                            {
-                                tx.Rollback();
-                                return false;
-                            }
-
-                            tx.Commit();
-                        }
-                    }
-
-                    if ((!fromThisMailBox || !toThisMailBox) && messagesInfo.Exists(m => m.FolderRestore == folder))
-                    {
-                        var clone = messagesInfo.FirstOrDefault(m => m.FolderRestore == folder && m.Uidl == uidl);
-                        if (clone != null)
-                            log.InfoFormat("Message already exists: mailId={0}. Clone", clone.Id);
-                        else
-                        {
-                            var existMessage = messagesInfo.First();
-
-                            if (!existMessage.IsRemoved)
-                            {
-                                if (string.IsNullOrEmpty(existMessage.Uidl))
-                                {
-                                    daoMailInfo.SetFieldValue(
-                                    SimpleMessagesExp.CreateBuilder(mailbox.TenantId, mailbox.UserId)
-                                        .SetMessageId(existMessage.Id)
-                                        .Build(),
-                                    MailTable.Columns.Uidl,
-                                    uidl);
-                                }
-                            }
-
-                            log.Info("Message already exists by MD5|MimeMessageId|Subject|DateSent");
+                            tx.Rollback();
+                            return false;
                         }
 
-                        return true;
+                        tx.Commit();
                     }
                 }
-                else
+
+                if ((!fromThisMailBox || !toThisMailBox) && messagesInfo.Exists(m => m.FolderRestore == folder))
                 {
-                    if (!fromThisMailBox && toThisMailBox && messagesInfo.Count == 1)
+                    var clone = messagesInfo.FirstOrDefault(m => m.FolderRestore == folder && m.Uidl == uidl);
+                    if (clone != null)
+                        log.InfoFormat("Message already exists: mailId={0}. Clone", clone.Id);
+                    else
                     {
-                        log.InfoFormat("Message already exists: mailId={0}. Outbox clone", messagesInfo.First().Id);
-                        return true;
+                        var existMessage = messagesInfo.First();
+
+                        if (!existMessage.IsRemoved)
+                        {
+                            if (string.IsNullOrEmpty(existMessage.Uidl))
+                            {
+                                daoMailInfo.SetFieldValue(
+                                SimpleMessagesExp.CreateBuilder(mailbox.TenantId, mailbox.UserId)
+                                    .SetMessageId(existMessage.Id)
+                                    .Build(),
+                                MailTable.Columns.Uidl,
+                                uidl);
+                            }
+                        }
+
+                        log.Info("Message already exists by MD5|MimeMessageId|Subject|DateSent");
                     }
+
+                    return true;
                 }
 
                 if (folder == FolderType.Sent)

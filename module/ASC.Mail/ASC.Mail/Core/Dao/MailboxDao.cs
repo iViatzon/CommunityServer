@@ -122,7 +122,7 @@ namespace ASC.Mail.Core.Dao
                 .InColumnValue(MailboxTable.Columns.IsRemoved, mailbox.IsRemoved)
                 .InColumnValue(MailboxTable.Columns.IsProcessed, mailbox.IsProcessed)
                 .InColumnValue(MailboxTable.Columns.IsServerMailbox, mailbox.IsTeamlabMailbox)
-                .InColumnValue(MailboxTable.Columns.Imap, mailbox.Imap)
+                // .InColumnValue(MailboxTable.Columns.Imap, mailbox.Imap) // SKIP:
                 .InColumnValue(MailboxTable.Columns.UserOnline, mailbox.UserOnline)
                 .InColumnValue(MailboxTable.Columns.IsDefault, mailbox.IsDefault)
                 .InColumnValue(MailboxTable.Columns.MsgCountLast, mailbox.MsgCountLast)
@@ -413,7 +413,7 @@ namespace ASC.Mail.Core.Dao
                 IsRemoved = Convert.ToBoolean(r[12]),
                 IsDefault = Convert.ToBoolean(r[13]),
                 QuotaError = Convert.ToBoolean(r[14]),
-                Imap = Convert.ToBoolean(r[15]),
+                // Imap = Convert.ToBoolean(r[15]), // SKIP:
                 BeginDate = Convert.ToDateTime(r[16]),
                 OAuthType = Convert.ToInt32(r[17]),
 

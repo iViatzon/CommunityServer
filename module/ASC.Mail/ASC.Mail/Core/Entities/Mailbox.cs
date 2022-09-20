@@ -36,7 +36,7 @@ namespace ASC.Mail.Core.Entities
         public bool IsRemoved { get; set; }
         public bool IsDefault { get; set; }
         public bool QuotaError { get; set; }
-        public bool Imap { get; set; }
+        // public bool Imap { get; set; } // SKIP:
         public DateTime BeginDate { get; set; }
         public int OAuthType { get; set; }
         public string OAuthToken { get; set; }

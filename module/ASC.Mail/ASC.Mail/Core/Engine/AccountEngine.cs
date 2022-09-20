@@ -268,7 +268,6 @@ namespace ASC.Mail.Core.Engine
 
                     loginResult = new LoginResult
                     {
-                        Imap = mbox.Imap,
                         IngoingSuccess = true,
                         OutgoingSuccess = true
                     };
@@ -285,7 +284,6 @@ namespace ASC.Mail.Core.Engine
                 ? mbox.SmtpPassword
                 : newMailBoxData.SmtpPassword;
 
-            newMailBoxData.Imap = mbox.Imap;
             newMailBoxData.Enabled = mbox.Enabled;
 
             return CreateAccount(newMailBoxData, out loginResult);

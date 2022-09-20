@@ -206,7 +206,6 @@ namespace ASC.Mail.Core.Engine
                                 SmtpEncryption = outgoingServer.SocketType.ToEncryptionType(),
                                 Authentication = incomingServer.Authentication.ToSaslMechanism(),
                                 SmtpAuthentication = outgoingServer.Authentication.ToSaslMechanism(),
-                                Imap = imap.Value,
 
                                 SmtpAccount = outgoingServerLogin,
                                 SmtpPassword = password,
@@ -243,7 +242,6 @@ namespace ASC.Mail.Core.Engine
                 Port = (isImap ? 993 : 110),
                 Encryption = isImap ? EncryptionType.SSL : EncryptionType.None,
                 SmtpEncryption = EncryptionType.None,
-                Imap = isImap,
                 SmtpAccount = email,
                 SmtpPassword = password,
                 SmtpServer = string.Format("smtp.{0}", host),
@@ -303,7 +301,7 @@ namespace ASC.Mail.Core.Engine
                     {
                         Hostname = mailbox.Server,
                         Port = mailbox.Port,
-                        Type = mailbox.Imap ? Defines.IMAP : Defines.POP3,
+                        Type = Defines.IMAP,
                         Username = mailbox.EMail.ToLoginFormat(mailbox.Account) ?? mailbox.Account,
                         SocketType = mailbox.Encryption.ToNameString(),
                         Authentication = mailbox.Authentication.ToNameString()
@@ -421,7 +419,6 @@ namespace ASC.Mail.Core.Engine
                         SizeLast = mailbox.Size,
                         LoginDelay = loginDelayTime,
                         Enabled = enabled,
-                        Imap = mailbox.Imap,
                         BeginDate = mailbox.BeginDate,
                         OAuthType = mailbox.OAuthType,
                         OAuthToken = mailbox.OAuthToken,
@@ -585,7 +582,7 @@ namespace ASC.Mail.Core.Engine
                     oAuthToken = account.OAuthToken;
                 }
 
-                if (account.Imap && account.ImapFolderChanged)
+                if (account.ImapFolderChanged)
                 {
                     if (account.BeginDateChanged)
                     {
@@ -971,7 +968,7 @@ namespace ASC.Mail.Core.Engine
 
             var mailboxData = new MailBoxData(mailbox.Tenant, mailbox.User, mailbox.Id, mailbox.Name, address,
                 address.ToLogin(inServer.Username), mailbox.Password, inServerOldFormat,
-                inServer.SocketType.ToEncryptionType(), inServer.Authentication.ToSaslMechanism(), mailbox.Imap,
+                inServer.SocketType.ToEncryptionType(), inServer.Authentication.ToSaslMechanism(),
                 address.ToLogin(outServer.Username), mailbox.SmtpPassword, outServerOldFormat,
                 outServer.SocketType.ToEncryptionType(), outServer.Authentication.ToSaslMechanism(),
                 Convert.ToByte(mailbox.OAuthType), mailbox.OAuthToken)

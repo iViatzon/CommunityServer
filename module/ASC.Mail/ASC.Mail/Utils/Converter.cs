@@ -58,7 +58,6 @@ namespace ASC.Mail.Utils
                                   TenantId = tenant,
                                   Enabled = true,
                                   BeginDate = DateTime.UtcNow.Subtract(new TimeSpan(MailBoxData.DefaultMailLimitedTimeDelta)),
-                                  Imap = inServer.Type == "imap",
                                   Account =
                                       inServer.Username.Replace("%EMAILADDRESS%", address.Address)
                                           .Replace("%EMAILLOCALPART%", address.User)
@@ -82,7 +81,7 @@ namespace ASC.Mail.Utils
                                   SmtpEncryption = outServer.SocketType.ToEncryptionType()
                               });
 
-            tempList = tempList.OrderByDescending(t => t.Imap).ToList();
+            tempList = tempList.OrderByDescending(t => /*t.Imap*/ true).ToList(); // NOTE:
 
             return tempList;
         }

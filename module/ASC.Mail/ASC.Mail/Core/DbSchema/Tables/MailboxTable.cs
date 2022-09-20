@@ -44,7 +44,7 @@ namespace ASC.Mail.Core.DbSchema.Tables
             public const string IsRemoved = "is_removed";
             public const string IsDefault = "is_default";
             public const string QuotaError = "quota_error";
-            public const string Imap = "imap";
+            // public const string Imap = "imap"; // SKIP:
             public const string BeginDate = "begin_date";
             public const string OAuthType = "token_type";
             public const string OAuthToken = "token";
@@ -87,7 +87,7 @@ namespace ASC.Mail.Core.DbSchema.Tables
                 Columns.IsRemoved,
                 Columns.IsDefault,
                 Columns.QuotaError,
-                Columns.Imap,
+                // Columns.Imap, // SKIP:
                 Columns.BeginDate,
                 Columns.OAuthType,
                 Columns.OAuthToken,

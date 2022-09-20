@@ -334,7 +334,7 @@ namespace ASC.Mail.Core.Engine
                         enableDsn: draft.RequestReceipt))
                     {
                         mc.Send(mimeMessage,
-                            draft.Mailbox.Imap && !Defines.DisableImapSendSyncServers.Contains(draft.Mailbox.Server));
+                            !Defines.DisableImapSendSyncServers.Contains(draft.Mailbox.Server));
                     }
 
                     try

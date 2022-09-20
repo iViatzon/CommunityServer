@@ -206,8 +206,7 @@ namespace ASC.Mail.Data.Contracts
 
         private OAuth20Token _token;
 
-        [DataMember(Name = "imap")]
-        public bool Imap { get; set; }
+        // [DataMember(Name = "imap")] public bool Imap { get; set; } // SKIP:
 
         [DataMember(Name = "begin_date")]
         public DateTime BeginDate { get; set; }
@@ -365,7 +364,7 @@ namespace ASC.Mail.Data.Contracts
 
         public MailBoxData(int tenant, string user, int mailboxId, string name,
             MailAddress email, string account, string password, string server,
-            EncryptionType encryption, SaslMechanism authentication, bool imap,
+            EncryptionType encryption, SaslMechanism authentication, /*bool imap,*/
             string smtpAccount, string smtpPassword, string smtpServer,
             EncryptionType smtpEncryption, SaslMechanism smtpAuthentication,
             byte oAuthType, string oAuthToken)
@@ -390,7 +389,7 @@ namespace ASC.Mail.Data.Contracts
             Port = int.Parse(server.Split(':')[1]);
             Encryption = encryption;
             Authentication = authentication;
-            Imap = imap;
+            // Imap = imap; // SKIP:
 
             SmtpAccount = smtpAccount;
             SmtpPassword = smtpPassword;

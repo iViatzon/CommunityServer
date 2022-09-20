@@ -27,6 +27,6 @@ namespace ASC.Mail.Clients
         public bool OutgoingSuccess { get; set; }
         public Exception OutgoingException { get; set; }
 
-        public bool Imap { get; set; }
+        // public bool Imap { get; set; } // SKIP:
     }
 }

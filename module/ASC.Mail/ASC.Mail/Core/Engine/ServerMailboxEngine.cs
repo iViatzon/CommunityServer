@@ -297,7 +297,6 @@ namespace ASC.Mail.Core.Engine
                         SizeLast = 0,
                         MsgCountLast = 0,
                         BeginDate = Defines.MinBeginDate,
-                        Imap = true,
                         Enabled = true,
                         IsTeamlabMailbox = true,
                         IsRemoved = false,
