@@ -1,0 +1,30 @@
+{
+  "solution": {
+    "path": "Studio.sln",
+    "projects": [
+      "common\\ASC.ActiveDirectory\\ASC.ActiveDirectory.csproj",
+      "common\\ASC.Common\\ASC.Common.csproj",
+      "common\\ASC.Core.Common\\ASC.Core.Common.csproj",
+      "common\\ASC.Data.Encryption\\ASC.Data.Encryption.csproj",
+      "common\\ASC.Data.Storage.Migration\\ASC.Data.Storage.Migration.csproj",
+      "common\\ASC.Data.Storage\\ASC.Data.Storage.csproj",
+      "common\\ASC.IPSecurity\\ASC.IPSecurity.csproj",
+      "common\\ASC.Notify.Textile\\ASC.Notify.Textile.csproj",
+      "module\\ASC.Api\\ASC.Api\\ASC.Api.Core.csproj",
+      "module\\ASC.Api\\ASC.Specific\\ASC.Specific.csproj",
+      "module\\ASC.AuditTrail\\ASC.AuditTrail.csproj",
+      "module\\ASC.ElasticSearch\\ASC.ElasticSearch.csproj",
+      "module\\ASC.Feed\\ASC.Feed.csproj",
+      "module\\ASC.Mail.Server\\ASC.Mail.Server\\ASC.Mail.Server.csproj",
+      "module\\ASC.Mail\\ASC.Mail\\ASC.Mail.csproj",
+      "module\\ASC.MessagingSystem\\ASC.MessagingSystem.csproj",
+      "module\\ASC.Thrdparty\\ASC.FederatedLogin\\ASC.FederatedLogin.csproj",
+      "module\\ASC.Thrdparty\\ASC.Thrdparty\\ASC.Thrdparty.csproj",
+      "module\\ASC.VoipService\\ASC.VoipService.csproj",
+      "web\\core\\ASC.Web.Core\\ASC.Web.Core.csproj",
+      "web\\studio\\ASC.Web.Studio\\ASC.Web.Studio.csproj",
+      "web\\studio\\ASC.Web.Studio\\Products\\CRM\\ASC.Web.CRM.csproj",
+      "web\\studio\\ASC.Web.Studio\\Products\\Files\\ASC.Web.Files.csproj"
+    ]
+  }
+}
