@@ -18,7 +18,6 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Web.Optimization;
 
 using ASC.Common.Logging;
 using ASC.Data.Storage;

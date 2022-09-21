@@ -19,14 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.Routing;
 
 using ASC.Api.Batch;
 using ASC.Api.Interfaces;
 using ASC.Common.Logging;
 
 using Autofac;
+using ASC.Api;
 
 namespace ASC.Api
 {
@@ -51,7 +50,7 @@ namespace ASC.Api
         }
 
         public ApiServer()
-            : this(HttpContext.Current)
+            : this(HttpContextHelper.Current)
         {
         }
 

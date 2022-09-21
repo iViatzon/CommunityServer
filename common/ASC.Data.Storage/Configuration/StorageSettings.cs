@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Web.Optimization;
 
 using ASC.Common.Caching;
 using ASC.Core;

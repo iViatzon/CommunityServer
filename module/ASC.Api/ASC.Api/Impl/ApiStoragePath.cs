@@ -17,9 +17,9 @@
 
 using System;
 using System.IO;
-using System.Web;
 
 using ASC.Api.Interfaces;
+using ASC.Api;
 
 namespace ASC.Api.Impl
 {
@@ -30,9 +30,9 @@ namespace ASC.Api.Impl
         public string GetDataDirectory(IApiEntryPoint entryPoint)
         {
             string basePath;
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                basePath = HttpContext.Current.Server.MapPath("~/EntryPointData");
+                basePath = HttpContextHelper.Current.Server.MapPath("~/EntryPointData");
             }
             else
             {

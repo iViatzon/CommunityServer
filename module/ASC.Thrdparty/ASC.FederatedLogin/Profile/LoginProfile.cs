@@ -24,11 +24,10 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Security.Permissions;
 using System.Text;
-using System.Web;
-using System.Web.Caching;
 
 using ASC.FederatedLogin.Helpers;
 using ASC.Security.Cryptography;
+using ASC.FederatedLogin;
 
 namespace ASC.FederatedLogin.Profile
 {
@@ -260,7 +259,7 @@ namespace ASC.FederatedLogin.Profile
 
         public static bool HasProfile()
         {
-            return HttpContext.Current != null && HasProfile(HttpContext.Current.Request);
+            return HttpContextHelper.Current != null && HasProfile(HttpContextHelper.Current.Request);
         }
 
         public static bool HasProfile(HttpRequest request)
@@ -271,7 +270,7 @@ namespace ASC.FederatedLogin.Profile
 
         public static LoginProfile GetProfile()
         {
-            return HttpContext.Current != null ? GetProfile(HttpContext.Current.Request) : new LoginProfile();
+            return HttpContextHelper.Current != null ? GetProfile(HttpContextHelper.Current.Request) : new LoginProfile();
         }
 
         internal static LoginProfile FromError(Exception e)

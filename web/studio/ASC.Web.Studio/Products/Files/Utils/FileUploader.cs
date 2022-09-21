@@ -35,6 +35,7 @@ using ASC.Web.Studio.Core;
 
 using File = ASC.Files.Core.File;
 using SecurityContext = ASC.Core.SecurityContext;
+using ASC.Web.Files;
 
 namespace ASC.Web.Files.Utils
 {
@@ -151,7 +152,7 @@ namespace ASC.Web.Files.Utils
                             folderId = folderDao.SaveFolder(new Folder { Title = subFolderTitle, ParentFolderID = folderId });
 
                             folder = folderDao.GetFolder(folderId);
-                            FilesMessageService.Send(folder, HttpContext.Current.Request, MessageAction.FolderCreated, folder.Title);
+                            FilesMessageService.Send(folder, HttpContextHelper.Current.Request, MessageAction.FolderCreated, folder.Title);
                         }
 
                         folderId = folder.ID;

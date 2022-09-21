@@ -25,7 +25,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading;
-using System.Web;
+using ASC.FederatedLogin;
 
 namespace ASC.FederatedLogin.LoginProviders
 {
@@ -33,7 +33,7 @@ namespace ASC.FederatedLogin.LoginProviders
     {
         public override string AccessTokenUrl { get { return "https://appleid.apple.com/auth/token"; } }
         public override string RedirectUri { get { return this["appleIdRedirectUrl"]; } }
-        public override string ClientID { get { return (this["appleIdClientIdMobile"] != null && HttpContext.Current != null && HttpContext.Current.Request.MobileApp()) ? this["appleIdClientIdMobile"] : this["appleIdClientId"]; } }
+        public override string ClientID { get { return (this["appleIdClientIdMobile"] != null && HttpContextHelper.Current != null && HttpContextHelper.Current.Request.MobileApp()) ? this["appleIdClientIdMobile"] : this["appleIdClientId"]; } }
         public override string ClientSecret => GenerateSecret();
         public override string CodeUrl { get { return "https://appleid.apple.com/auth/authorize"; } }
         public override string Scopes { get { return ""; } }

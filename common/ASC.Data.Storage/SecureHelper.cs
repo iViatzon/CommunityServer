@@ -16,9 +16,9 @@
 
 
 using System;
-using System.Web;
 
 using ASC.Common.Logging;
+using ASC.Data.Storage;
 
 namespace ASC.Data.Storage
 {
@@ -28,7 +28,7 @@ namespace ASC.Data.Storage
         {
             try
             {
-                return HttpContext.Current != null && Uri.UriSchemeHttps.Equals(HttpContext.Current.Request.GetUrlRewriter().Scheme, StringComparison.OrdinalIgnoreCase);
+                return HttpContextHelper.Current != null && Uri.UriSchemeHttps.Equals(HttpContextHelper.Current.Request.GetUrlRewriter().Scheme, StringComparison.OrdinalIgnoreCase);
             }
             catch (Exception err)
             {

@@ -22,7 +22,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Authentication;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Core;
@@ -42,6 +41,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using RestSharp;
+using ASC.Mail;
 
 namespace ASC.Mail.Utils
 {
@@ -86,8 +86,8 @@ namespace ASC.Mail.Utils
 
             _log.DebugFormat("Tenant={0} User='{1}' IsAuthenticated={2} Scheme='{3}' HttpContext is {4}",
                       tenant.TenantId, user.ID, user.IsAuthenticated, Scheme,
-                      HttpContext.Current != null
-                          ? string.Format("not null and UrlRewriter = {0}, RequestUrl = {1}", HttpContext.Current.Request.GetUrlRewriter(), HttpContext.Current.Request.Url)
+                      HttpContextHelper.Current != null
+                          ? string.Format("not null and UrlRewriter = {0}, RequestUrl = {1}", HttpContextHelper.Current.Request.GetUrlRewriter(), HttpContextHelper.Current.Request.Url)
                           : "null");
 
             if (!user.IsAuthenticated)

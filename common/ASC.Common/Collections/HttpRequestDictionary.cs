@@ -17,7 +17,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Web;
+using ASC.Common;
 
 namespace ASC.Collections
 {
@@ -46,25 +46,25 @@ namespace ASC.Collections
 
         public override void Reset(string rootKey, string key)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
                 var builtkey = BuildKey(key, rootKey);
-                HttpContext.Current.Items[builtkey] = null;
+                HttpContextHelper.Current.Items[builtkey] = null;
             }
         }
 
         public override void Add(string rootkey, string key, T newValue)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
                 var builtkey = BuildKey(key, rootkey);
-                HttpContext.Current.Items[builtkey] = new CachedItem(newValue);
+                HttpContextHelper.Current.Items[builtkey] = new CachedItem(newValue);
             }
         }
 
         protected override object GetObjectFromCache(string fullKey)
         {
-            return HttpContext.Current != null ? HttpContext.Current.Items[fullKey] : null;
+            return HttpContextHelper.Current != null ? HttpContextHelper.Current.Items[fullKey] : null;
         }
 
         protected override bool FitsCondition(object cached)
@@ -78,15 +78,15 @@ namespace ASC.Collections
 
         protected override void OnHit(string fullKey)
         {
-            Debug.Print("{0} http cache hit:{1}", HttpContext.Current.Request.Url, fullKey);
+            Debug.Print("{0} http cache hit:{1}", HttpContextHelper.Current.Request.Url, fullKey);
         }
 
         protected override void OnMiss(string fullKey)
         {
             Uri uri = null;
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                uri = HttpContext.Current.Request.Url;
+                uri = HttpContextHelper.Current.Request.Url;
             }
             Debug.Print("{0} http cache miss:{1}", uri == null ? "no-context" : uri.AbsolutePath, fullKey);
         }

@@ -21,7 +21,6 @@ using System.Security;
 using System.Security.Authentication;
 using System.Security.Principal;
 using System.Threading;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Common.Security;
@@ -33,6 +32,7 @@ using ASC.Core.Security.Authentication;
 using ASC.Core.Security.Authorizing;
 using ASC.Core.Tenants;
 using ASC.Core.Users;
+using ASC.Core.Common;
 
 namespace ASC.Core
 {
@@ -81,9 +81,9 @@ namespace ASC.Core
                 {
                     var ipFrom = string.Empty;
                     var address = string.Empty;
-                    if (HttpContext.Current != null)
+                    if (HttpContextHelper.Current != null)
                     {
-                        var request = HttpContext.Current.Request;
+                        var request = HttpContextHelper.Current.Request;
                         ipFrom = "from " + (request.Headers["X-Forwarded-For"] ?? request.UserHostAddress);
                         address = "for " + request.GetUrlRewriter();
                     }
@@ -143,9 +143,9 @@ namespace ASC.Core
                 {
                     var ipFrom = string.Empty;
                     var address = string.Empty;
-                    if (HttpContext.Current != null)
+                    if (HttpContextHelper.Current != null)
                     {
-                        var request = HttpContext.Current.Request;
+                        var request = HttpContextHelper.Current.Request;
                         address = "for " + request.GetUrlRewriter();
                         ipFrom = "from " + (request.Headers["X-Forwarded-For"] ?? request.UserHostAddress);
                     }
@@ -299,7 +299,7 @@ namespace ASC.Core
             set
             {
                 Thread.CurrentPrincipal = value;
-                if (HttpContext.Current != null) HttpContext.Current.User = value;
+                if (HttpContextHelper.Current != null) HttpContextHelper.Current.User = value;
             }
         }
     }

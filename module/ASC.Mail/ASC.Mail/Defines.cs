@@ -19,10 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 
 using ASC.Core;
 using ASC.Web.Studio.Core;
+using ASC.Mail;
 
 namespace ASC.Mail
 {
@@ -350,9 +350,9 @@ namespace ASC.Mail
                     return ApiSchema;
                 }
 
-                return HttpContext.Current == null
+                return HttpContextHelper.Current == null
                     ? Uri.UriSchemeHttp
-                    : HttpContext.Current.Request.GetUrlRewriter().Scheme;
+                    : HttpContextHelper.Current.Request.GetUrlRewriter().Scheme;
             }
         }
 

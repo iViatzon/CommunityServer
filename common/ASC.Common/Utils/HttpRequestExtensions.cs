@@ -18,6 +18,7 @@
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Reflection;
+using ASC.Common;
 
 namespace System.Web
 {
@@ -114,7 +115,7 @@ namespace System.Web
                         typeof(HttpRequest).InvokeMember("_url",
                                                           BindingFlags.NonPublic | BindingFlags.SetField |
                                                           BindingFlags.Instance,
-                                                          null, HttpContext.Current.Request,
+                                                          null, HttpContextHelper.Current.Request,
                                                           new object[] { null });
                         oldUri = requestUri;
                         context.Items["oldUri"] = oldUri;

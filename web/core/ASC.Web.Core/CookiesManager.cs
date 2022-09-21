@@ -17,7 +17,6 @@
 
 using System;
 using System.Security;
-using System.Web;
 
 using ASC.Core;
 using ASC.Core.Data;
@@ -27,6 +26,7 @@ using ASC.MessagingSystem;
 using ASC.Web.Studio.Utility;
 
 using SecurityContext = ASC.Core.SecurityContext;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core
 {
@@ -54,30 +54,30 @@ namespace ASC.Web.Core
 
         public static string GetRequestVar(CookiesType type)
         {
-            if (HttpContext.Current == null) return "";
+            if (HttpContextHelper.Current == null) return "";
 
-            var cookie = HttpContext.Current.Request.QueryString[GetCookiesName(type)] ?? HttpContext.Current.Request.Form[GetCookiesName(type)];
+            var cookie = HttpContextHelper.Current.Request.QueryString[GetCookiesName(type)] ?? HttpContextHelper.Current.Request.Form[GetCookiesName(type)];
 
             return string.IsNullOrEmpty(cookie) ? GetCookies(type) : cookie;
         }
 
         public static void SetCookies(CookiesType type, string value, bool session = false)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContextHelper.Current == null) return;
 
-            HttpContext.Current.Response.Cookies[GetCookiesName(type)].Value = value;
-            HttpContext.Current.Response.Cookies[GetCookiesName(type)].Expires = GetExpiresDate(session);
+            HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Value = value;
+            HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Expires = GetExpiresDate(session);
 
             if (type == CookiesType.AuthKey)
             {
-                HttpContext.Current.Response.Cookies[GetCookiesName(type)].HttpOnly = true;
+                HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].HttpOnly = true;
 
-                if (HttpContext.Current.Request.GetUrlRewriter().Scheme == "https")
+                if (HttpContextHelper.Current.Request.GetUrlRewriter().Scheme == "https")
                 {
-                    HttpContext.Current.Response.Cookies[GetCookiesName(type)].Secure = true;
+                    HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Secure = true;
                     if (CoreContext.Configuration.Personal)
                     {
-                        var cookies = HttpContext.Current.Response.Cookies[GetCookiesName(type)];
+                        var cookies = HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)];
 
                         cookies.GetType()
                                .GetProperty("SameSite")
@@ -90,22 +90,22 @@ namespace ASC.Web.Core
 
         public static void SetCookies(CookiesType type, string value, string domain, bool session = false)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContextHelper.Current == null) return;
 
-            HttpContext.Current.Response.Cookies[GetCookiesName(type)].Value = value;
-            HttpContext.Current.Response.Cookies[GetCookiesName(type)].Domain = domain;
-            HttpContext.Current.Response.Cookies[GetCookiesName(type)].Expires = GetExpiresDate(session);
+            HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Value = value;
+            HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Domain = domain;
+            HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Expires = GetExpiresDate(session);
 
             if (type == CookiesType.AuthKey)
             {
-                HttpContext.Current.Response.Cookies[GetCookiesName(type)].HttpOnly = true;
+                HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].HttpOnly = true;
 
-                if (HttpContext.Current.Request.GetUrlRewriter().Scheme == "https")
+                if (HttpContextHelper.Current.Request.GetUrlRewriter().Scheme == "https")
                 {
-                    HttpContext.Current.Response.Cookies[GetCookiesName(type)].Secure = true;
+                    HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Secure = true;
                     if (CoreContext.Configuration.Personal)
                     {
-                        var cookies = HttpContext.Current.Response.Cookies[GetCookiesName(type)];
+                        var cookies = HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)];
 
                         cookies.GetType()
                                .GetProperty("SameSite")
@@ -117,22 +117,22 @@ namespace ASC.Web.Core
 
         public static string GetCookies(CookiesType type)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
                 var cookieName = GetCookiesName(type);
 
-                if (HttpContext.Current.Request.Cookies[cookieName] != null)
-                    return HttpContext.Current.Request.Cookies[cookieName].Value ?? "";
+                if (HttpContextHelper.Current.Request.Cookies[cookieName] != null)
+                    return HttpContextHelper.Current.Request.Cookies[cookieName].Value ?? "";
             }
             return "";
         }
 
         public static void ClearCookies(CookiesType type)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContextHelper.Current == null) return;
 
-            if (HttpContext.Current.Request.Cookies[GetCookiesName(type)] != null)
-                HttpContext.Current.Response.Cookies[GetCookiesName(type)].Expires = DateTime.Now.AddDays(-3);
+            if (HttpContextHelper.Current.Request.Cookies[GetCookiesName(type)] != null)
+                HttpContextHelper.Current.Response.Cookies[GetCookiesName(type)].Expires = DateTime.Now.AddDays(-3);
         }
 
         private static DateTime GetExpiresDate(bool session)
@@ -277,7 +277,7 @@ namespace ASC.Web.Core
             var userId = SecurityContext.CurrentAccount.ID;
             var data = new MessageUserData(tenantId, userId);
 
-            return MessageService.SendLoginMessage(HttpContext.Current == null ? null : HttpContext.Current.Request, data, action);
+            return MessageService.SendLoginMessage(HttpContextHelper.Current == null ? null : HttpContextHelper.Current.Request, data, action);
         }
     }
 }

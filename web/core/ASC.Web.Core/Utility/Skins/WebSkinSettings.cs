@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Web;
 
 using ASC.Data.Storage;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Utility.Skins
 {
@@ -42,11 +42,11 @@ namespace ASC.Web.Core.Utility.Skins
 
         static WebSkin()
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContextHelper.Current == null) return;
 
             try
             {
-                var dir = HttpContext.Current.Server.MapPath("~/skins/default/");
+                var dir = HttpContextHelper.Current.Server.MapPath("~/skins/default/");
                 if (!Directory.Exists(dir)) return;
 
                 foreach (var f in Directory.GetFiles(dir, "common_style.*.css"))

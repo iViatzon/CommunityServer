@@ -16,7 +16,7 @@
 
 
 using System;
-using System.Web;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Utility
 {
@@ -24,7 +24,7 @@ namespace ASC.Web.Core.Utility
     {
         public static string SelectCurrentUriScheme(string uri)
         {
-            return HttpContext.Current != null ? SelectUriScheme(uri, HttpContext.Current.Request.GetUrlRewriter().Scheme) : uri;
+            return HttpContextHelper.Current != null ? SelectUriScheme(uri, HttpContextHelper.Current.Request.GetUrlRewriter().Scheme) : uri;
         }
 
         public static string SelectUriScheme(string uri, string scheme)
@@ -34,9 +34,9 @@ namespace ASC.Web.Core.Utility
 
         public static Uri SelectCurrentUriScheme(Uri uri)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                return SelectUriScheme(uri, HttpContext.Current.Request.GetUrlRewriter().Scheme);
+                return SelectUriScheme(uri, HttpContextHelper.Current.Request.GetUrlRewriter().Scheme);
             }
             return uri;
         }

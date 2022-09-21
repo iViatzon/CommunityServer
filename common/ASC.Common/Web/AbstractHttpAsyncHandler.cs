@@ -19,7 +19,7 @@ using System;
 using System.Globalization;
 using System.Security.Principal;
 using System.Threading;
-using System.Web;
+using ASC.Common;
 
 
 namespace ASC.Common.Web
@@ -42,7 +42,7 @@ namespace ASC.Common.Web
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentPrincipal = principal;
-            HttpContext.Current = context;
+            HttpContextHelper.Current = context;
             OnProcessRequest(context);
         }
 

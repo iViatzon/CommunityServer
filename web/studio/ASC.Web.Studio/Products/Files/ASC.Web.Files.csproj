@@ -1,424 +1,196 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <UseGlobalApplicationHostFile />
-    <Use64BitIISExpress />
-  </PropertyGroup>
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8C534AF7-5696-4E68-9FF4-FFC311893C10}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ASC.Web.Files</RootNamespace>
-    <AssemblyName>ASC.Web.Files</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>4.0</OldToolsVersion>
-    <TargetFrameworkProfile />
-    <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
     <OutputPath>..\..\bin\</OutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Configuration\FilesSettings.cs" />
-    <Compile Include="Controls\AccessRights\FormFilling.ascx.cs">
+    <Compile Update="Controls\AccessRights\FormFilling.ascx.cs">
       <DependentUpon>FormFilling.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\AccessRights\FormFilling.ascx.designer.cs">
+    <Compile Update="Controls\AccessRights\FormFilling.ascx.designer.cs">
       <DependentUpon>FormFilling.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppBanner\AppBanner.ascx.cs">
+    <Compile Update="Controls\AppBanner\AppBanner.ascx.cs">
       <DependentUpon>AppBanner.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\AppBanner\AppBanner.ascx.designer.cs">
+    <Compile Update="Controls\AppBanner\AppBanner.ascx.designer.cs">
       <DependentUpon>AppBanner.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ContentList\ContentList.ascx.cs">
+    <Compile Update="Controls\ContentList\ContentList.ascx.cs">
       <DependentUpon>ContentList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ContentList\ContentList.ascx.designer.cs">
+    <Compile Update="Controls\ContentList\ContentList.ascx.designer.cs">
       <DependentUpon>ContentList.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ConvertFile\ConfirmConvert.ascx.cs">
+    <Compile Update="Controls\ConvertFile\ConfirmConvert.ascx.cs">
       <DependentUpon>ConfirmConvert.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ConvertFile\ConfirmConvert.ascx.designer.cs">
+    <Compile Update="Controls\ConvertFile\ConfirmConvert.ascx.designer.cs">
       <DependentUpon>ConfirmConvert.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FileChoisePopup\FileChoisePopup.ascx.cs">
+    <Compile Update="Controls\FileChoisePopup\FileChoisePopup.ascx.cs">
       <DependentUpon>FileChoisePopup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\FileChoisePopup\FileChoisePopup.ascx.designer.cs">
+    <Compile Update="Controls\FileChoisePopup\FileChoisePopup.ascx.designer.cs">
       <DependentUpon>FileChoisePopup.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainContent\MainContentFilter.ascx.cs">
+    <Compile Update="Controls\MainContent\MainContentFilter.ascx.cs">
       <DependentUpon>MainContentFilter.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\MainContent\MainContentFilter.ascx.designer.cs">
+    <Compile Update="Controls\MainContent\MainContentFilter.ascx.designer.cs">
       <DependentUpon>MainContentFilter.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainMenu\MainButton.ascx.cs">
+    <Compile Update="Controls\MainMenu\MainButton.ascx.cs">
       <DependentUpon>MainButton.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\MainMenu\MainButton.ascx.designer.cs">
+    <Compile Update="Controls\MainMenu\MainButton.ascx.designer.cs">
       <DependentUpon>MainButton.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PrivateRoomOpenFile\PrivateRoomOpenFile.ascx.cs">
+    <Compile Update="Controls\PrivateRoomOpenFile\PrivateRoomOpenFile.ascx.cs">
       <DependentUpon>PrivateRoomOpenFile.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\PrivateRoomOpenFile\PrivateRoomOpenFile.ascx.designer.cs">
+    <Compile Update="Controls\PrivateRoomOpenFile\PrivateRoomOpenFile.ascx.designer.cs">
       <DependentUpon>PrivateRoomOpenFile.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Sailfish\Sailfish.ascx.cs">
+    <Compile Update="Controls\Sailfish\Sailfish.ascx.cs">
       <DependentUpon>Sailfish.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\Sailfish\Sailfish.ascx.designer.cs">
+    <Compile Update="Controls\Sailfish\Sailfish.ascx.designer.cs">
       <DependentUpon>Sailfish.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Desktop\Desktop.ascx.cs">
+    <Compile Update="Controls\Desktop\Desktop.ascx.cs">
       <DependentUpon>Desktop.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\Desktop\Desktop.ascx.designer.cs">
+    <Compile Update="Controls\Desktop\Desktop.ascx.designer.cs">
       <DependentUpon>Desktop.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FileSelector\FileSelector.ascx.cs">
+    <Compile Update="Controls\FileSelector\FileSelector.ascx.cs">
       <DependentUpon>FileSelector.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\FileSelector\FileSelector.ascx.designer.cs">
+    <Compile Update="Controls\FileSelector\FileSelector.ascx.designer.cs">
       <DependentUpon>FileSelector.ascx</DependentUpon>
     </Compile>
-    <Compile Include="App.aspx.cs">
+    <Compile Update="App.aspx.cs">
       <DependentUpon>App.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="App.aspx.designer.cs">
+    <Compile Update="App.aspx.designer.cs">
       <DependentUpon>App.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MoreFeatures\MoreFeatures.ascx.cs">
+    <Compile Update="Controls\MoreFeatures\MoreFeatures.ascx.cs">
       <DependentUpon>MoreFeatures.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\MoreFeatures\MoreFeatures.ascx.designer.cs">
+    <Compile Update="Controls\MoreFeatures\MoreFeatures.ascx.designer.cs">
       <DependentUpon>MoreFeatures.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UnsubscribeDialog\UnsubscribeDialog.ascx.cs">
+    <Compile Update="Controls\UnsubscribeDialog\UnsubscribeDialog.ascx.cs">
       <DependentUpon>UnsubscribeDialog.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\UnsubscribeDialog\UnsubscribeDialog.ascx.designer.cs">
+    <Compile Update="Controls\UnsubscribeDialog\UnsubscribeDialog.ascx.designer.cs">
       <DependentUpon>UnsubscribeDialog.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SharingDialog\SharingDialog.ascx.cs">
+    <Compile Update="Controls\SharingDialog\SharingDialog.ascx.cs">
       <DependentUpon>SharingDialog.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\SharingDialog\SharingDialog.ascx.designer.cs">
+    <Compile Update="Controls\SharingDialog\SharingDialog.ascx.designer.cs">
       <DependentUpon>SharingDialog.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Core\Compress\CompressToArchive.cs" />
-    <Compile Include="Core\Compress\CompressToTarGz.cs" />
-    <Compile Include="Core\Compress\CompressToZip.cs" />
-    <Compile Include="Core\Compress\ICompress.cs" />
-    <Compile Include="Core\Dao\Interfaces\ILinkDao.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\LinkDao.cs" />
-    <Compile Include="Core\Entries\AutoCleanUpData.cs" />
-    <Compile Include="Core\Entries\EncryptionKeyPair.cs" />
-    <Compile Include="Core\Entries\ForcesaveType.cs" />
-    <Compile Include="Core\Entries\Thumbnail.cs" />
-    <Compile Include="Helpers\EasyBibHelper.cs" />
-    <Compile Include="Core\DIHelper.cs" />
-    <Compile Include="Core\Search\FilesWrapper.cs" />
-    <Compile Include="Core\Search\FoldersWrapper.cs" />
-    <Compile Include="HttpHandlers\docusignhandler.ashx.cs">
+    <Compile Update="HttpHandlers\docusignhandler.ashx.cs">
       <DependentUpon>docusignhandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="OpenPrivate.aspx.cs">
+    <Compile Update="OpenPrivate.aspx.cs">
       <DependentUpon>OpenPrivate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpenPrivate.aspx.designer.cs">
+    <Compile Update="OpenPrivate.aspx.designer.cs">
       <DependentUpon>OpenPrivate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SaveAs.aspx.cs">
+    <Compile Update="SaveAs.aspx.cs">
       <DependentUpon>SaveAs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SaveAs.aspx.designer.cs">
+    <Compile Update="SaveAs.aspx.designer.cs">
       <DependentUpon>SaveAs.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Core\ResponseStream.cs" />
-    <Compile Include="FileChoice.aspx.cs">
+    <Compile Update="FileChoice.aspx.cs">
       <DependentUpon>FileChoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FileChoice.aspx.designer.cs">
+    <Compile Update="FileChoice.aspx.designer.cs">
       <DependentUpon>FileChoice.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Masters\EditorScripts.ascx.cs">
+    <Compile Update="Masters\EditorScripts.ascx.cs">
       <DependentUpon>EditorScripts.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Services\FFmpegService\FFmpeg.cs" />
-    <Compile Include="Services\WCFService\FileExceptionFilterAttribute.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileOperationsManager.cs" />
-    <Compile Include="Services\WCFService\FileStorageServiceController.cs" />
-    <Compile Include="Services\WCFService\Wrappers\MentionWrapper.cs" />
-    <Compile Include="Core\Entries\EntryProperties.cs" />
-    <Compile Include="ThirdPartyApp\BoxApp.cs" />
-    <Compile Include="ThirdPartyApp\IThirdPartyApp.cs" />
-    <Compile Include="ThirdPartyApp\GoogleDriveApp.cs" />
-    <Compile Include="ThirdPartyApp\Token.cs" />
-    <Compile Include="HttpHandlers\ThirdPartyAppHandler.ashx.cs">
+    <Compile Update="HttpHandlers\ThirdPartyAppHandler.ashx.cs">
       <DependentUpon>thirdpartyapphandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Services\WCFService\FileEntrySerializer.cs" />
-    <Compile Include="Share.aspx.cs">
+    <Compile Update="Share.aspx.cs">
       <DependentUpon>Share.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Share.aspx.designer.cs">
+    <Compile Update="Share.aspx.designer.cs">
       <DependentUpon>Share.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Core\FilesIntegration.cs" />
-    <Compile Include="Configuration\FilesSpaceUsageStatManager.cs" />
-    <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\DocuSignHelper.cs" />
-    <Compile Include="Helpers\Global.cs" />
-    <Compile Include="Helpers\FilesMessageService.cs" />
-    <Compile Include="Helpers\PathProvider.cs" />
-    <Compile Include="Helpers\ThirdpartyConfiguration.cs" />
-    <Compile Include="Helpers\WordpressHelper.cs" />
-    <Compile Include="Configuration\ProductEntryPoint.cs" />
-    <Compile Include="HttpHandlers\SearchHandler.cs" />
-    <Compile Include="Configuration\SubscriptionManager.cs" />
-    <Compile Include="Warmup.aspx.cs">
+    <Compile Update="Warmup.aspx.cs">
       <DependentUpon>Warmup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Warmup.aspx.designer.cs">
+    <Compile Update="Warmup.aspx.designer.cs">
       <DependentUpon>Warmup.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Entries\AuthData.cs" />
-    <Compile Include="Core\Dao\Interfaces\IProviderInfo.cs" />
-    <Compile Include="Core\Dao\Interfaces\IProviderDao.cs" />
-    <Compile Include="Core\Security\IFileSecurityProvider.cs" />
-    <Compile Include="Core\Entries\File.cs" />
-    <Compile Include="Core\Entries\FileEntry.cs" />
-    <Compile Include="Core\Entries\FileEntryTypeEnum.cs" />
-    <Compile Include="Core\Entries\EditHistory.cs" />
-    <Compile Include="Core\FilterTypeEnum.cs" />
-    <Compile Include="Core\Entries\Folder.cs" />
-    <Compile Include="Core\Dao\Interfaces\IDaoFactory.cs" />
-    <Compile Include="Core\Dao\Interfaces\IFileDao.cs" />
-    <Compile Include="Core\Dao\Interfaces\IFolderDao.cs" />
-    <Compile Include="Core\Dao\Interfaces\ITagDao.cs" />
-    <Compile Include="Core\Entries\OrderBy.cs" />
-    <Compile Include="Core\Entries\Tag.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\AbstractDao.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\DaoFactory.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\FileDao.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\FolderDao.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\SecurityDao.cs" />
-    <Compile Include="Core\Dao\TeamlabDao\TagDao.cs" />
-    <Compile Include="Core\Security\FileSecurity.cs" />
-    <Compile Include="Core\Security\FileShare.cs" />
-    <Compile Include="Core\Security\FileShareRecord.cs" />
-    <Compile Include="Core\Security\IFileSecurity.cs" />
-    <Compile Include="Core\Security\ISecurityDao.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Masters\BasicTemplate.Master.cs">
+    <Compile Update="Masters\BasicTemplate.Master.cs">
       <DependentUpon>BasicTemplate.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Masters\BasicTemplate.Master.designer.cs">
+    <Compile Update="Masters\BasicTemplate.Master.designer.cs">
       <DependentUpon>BasicTemplate.Master</DependentUpon>
     </Compile>
-    <Compile Include="Masters\ClientScripts\FilesLocalizationResources.cs" />
-    <Compile Include="Masters\ClientScripts\FilesConstantsResources.cs" />
-    <Content Include="App_Themes\default\images\empty_screen_privacy.png" />
-    <Content Include="App_Themes\default\images\empty_screen_templates.png" />
-    <Content Include="App_Themes\default\images\empty_screen_favorites.png" />
-    <Content Include="App_Themes\default\images\empty_screen_recent.png" />
-    <Content Include="App_Themes\default\images\file_docx.png" />
-    <Content Include="App_Themes\default\images\file_pptx.png" />
-    <Content Include="App_Themes\default\images\file_xlsx.png" />
-    <Content Include="App_Themes\default\images\personal_convert.png" />
-    <Content Include="App_Themes\default\saveas.css" />
-    <Content Include="Controls\AccessRights\formfilling.js" />
-    <Content Include="Controls\AccessRights\formfilling.css" />
-    <Content Include="Controls\AccessRights\FormFilling.ascx" />
-    <Content Include="Controls\AccessRights\images\fillformsgray.svg" />
-    <Content Include="Controls\AppBanner\AppBanner.ascx" />
-    <Content Include="Controls\AppBanner\appbanner.css" />
-    <Content Include="Controls\AppBanner\images\android.svg" />
-    <Content Include="Controls\AppBanner\images\android_gray.svg" />
-    <Content Include="Controls\AppBanner\images\ios.svg" />
-    <Content Include="Controls\AppBanner\images\ios_gray.svg" />
-    <Content Include="Controls\AppBanner\images\linux.svg" />
-    <Content Include="Controls\AppBanner\images\linux_gray.svg" />
-    <Content Include="Controls\AppBanner\images\mac.svg" />
-    <Content Include="Controls\AppBanner\images\mac_gray.svg" />
-    <Content Include="Controls\AppBanner\images\win.svg" />
-    <Content Include="Controls\AppBanner\images\win_gray.svg" />
-    <Content Include="Controls\ChunkUploadDialog\chunkuploadmanager.js" />
-    <Content Include="Controls\ChunkUploadDialog\images\mainmenu_upload.png" />
-    <Content Include="Controls\ContentList\ContentList.ascx" />
-    <Content Include="Controls\ContentList\contentlist.css" />
-    <Content Include="Controls\ContentList\images\encrypted.png" />
-    <Content Include="Controls\ContentList\images\retina\encrypted.png" />
-    <Content Include="Controls\ContentList\images\throbber.gif" />
-    <Content Include="Controls\ContentList\images\version_operation.png" />
-    <Content Include="Controls\ConvertFile\ConfirmConvert.ascx" />
-    <Content Include="Controls\ConvertFile\confirmconvert.js" />
-    <Content Include="Controls\ConvertFile\confirmconvert.css" />
-    <Content Include="Controls\FileChoisePopup\filechoisepopup.js" />
-    <Content Include="Controls\FileChoisePopup\filechoisepopup.css" />
-    <Content Include="Controls\FileChoisePopup\FileChoisePopup.ascx" />
-    <Content Include="Controls\EmptyFolder\images\privacy.svg" />
-    <Content Include="Controls\MainContent\MainContentFilter.ascx" />
-    <Content Include="Controls\MainMenu\MainButton.ascx" />
-    <Content Include="Controls\PrivateRoomOpenFile\privateroomopenfile.css" />
-    <Content Include="Controls\PrivateRoomOpenFile\privateroomopenfile.js" />
-    <Content Include="Controls\PrivateRoomOpenFile\PrivateRoomOpenFile.ascx" />
-    <Content Include="Controls\Sailfish\Sailfish.ascx" />
-    <Content Include="Controls\Sailfish\sailfish.js" />
-    <Content Include="Controls\Sailfish\sailfish.css" />
-    <Content Include="Controls\Desktop\Desktop.ascx" />
-    <Content Include="Controls\Desktop\desktop.css" />
-    <Content Include="Controls\Desktop\desktop.js" />
-    <Content Include="Controls\Desktop\images\logo.png" />
-    <Content Include="Controls\SharingDialog\images\link.svg" />
-    <Content Include="Controls\SharingDialog\images\link_via.png" />
-    <Content Include="Controls\SharingDialog\images\settings.svg" />
-    <Content Include="Controls\SharingDialog\images\user.svg" />
-    <Content Include="Controls\UnsubscribeDialog\unsubscribedialog.js" />
-    <Content Include="Controls\UnsubscribeDialog\UnsubscribeDialog.ascx" />
-    <Content Include="Controls\SharingDialog\sharingdialog.css" />
-    <Content Include="Controls\SharingDialog\sharingdialog.js" />
-    <Content Include="Controls\SharingDialog\SharingDialog.ascx" />
-    <Content Include="Controls\ThirdParty\images\retina\thirdparty_boxnet.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_docusign.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_nextcloud.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_yandex_ru.png" />
-    <Content Include="Controls\ThirdParty\images\trash_12.png" />
-    <Content Include="Controls\ThirdParty\images\user_12.png" />
-    <Content Include="Controls\FileSelector\fileselector.js" />
-    <Content Include="Controls\FileSelector\FileSelector.ascx" />
-    <Content Include="Controls\FileSelector\fileselector.css" />
-    <Content Include="Controls\MoreFeatures\css\img\check.png" />
-    <Content Include="Controls\MoreFeatures\css\img\logo_flat.png" />
-    <Content Include="Controls\MoreFeatures\css\morefeatures.css" />
-    <Content Include="Controls\MoreFeatures\MoreFeatures.ascx" />
-    <Content Include="js\saveas.js" />
-    <Content Include="loader.html" />
-    <Content Include="OpenPrivate.aspx" />
-    <Content Include="SaveAs.aspx" />
-    <Content Include="FileChoice.aspx" />
-    <Content Include="js\filechoice.js" />
-    <Content Include="Masters\EditorScripts.ascx" />
-    <Content Include="Masters\BasicTemplate.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DocEditor.aspx" />
-    <Content Include="Default.aspx" />
-    <Content Include="HttpHandlers\filehandler.ashx" />
-    <Content Include="HttpHandlers\docusignhandler.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DocEditor.aspx.cs">
+    <Compile Update="DocEditor.aspx.cs">
       <DependentUpon>DocEditor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DocEditor.aspx.designer.cs">
+    <Compile Update="DocEditor.aspx.designer.cs">
       <DependentUpon>DocEditor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
+    <Compile Update="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
+    <Compile Update="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="HttpHandlers\FileHandler.ashx.cs">
+    <Compile Update="HttpHandlers\FileHandler.ashx.cs">
       <DependentUpon>filehandler.ashx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Services\NotifyService\NotifyClient.cs" />
-    <Compile Include="Services\NotifyService\NotifyConstants.cs" />
-    <Compile Include="Services\NotifyService\NotifySource.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileMarkAsReadOperation.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileOperationType.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileOperationResult.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileDownloadOperation.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileConflictResolveType.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileDeleteOperation.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileMoveCopyOperation.cs" />
-    <Compile Include="Services\WCFService\FileOperations\FileOperation.cs" />
-    <Compile Include="Services\WCFService\IFileStorageService.cs" />
-    <Compile Include="Services\WCFService\Wrappers\AceWrapper.cs" />
-    <Compile Include="Services\WCFService\Wrappers\BaseTypeWrapper.cs" />
-    <Compile Include="Services\WCFService\Wrappers\DataWrapper.cs" />
-    <Compile Include="Services\WCFService\Wrappers\ThirdPartyParams.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App.aspx" />
-    <Content Include="Share.aspx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Templates\collection.xsl" />
-    <Content Include="Templates\getnewitems.xsl" />
-    <Content Include="Templates\getfilehistory.xsl" />
-    <Content Include="Templates\getfolderitem.xsl" />
-    <Content Include="Templates\getfolderitems.xsl" />
-    <Content Include="Templates\getfolderstree.xsl" />
-    <Content Include="Templates\gettooltip.xsl" />
-    <Content Include="Templates\getlistconvert.xsl" />
-    <Content Include="Templates\getthirdpartyitem.xsl" />
-    <Content Include="Templates\getuser.xsl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\FilesCommonResource.az-Latn-AZ.resx" Condition="$(Cultures.Contains('az-Latn-AZ'))">
@@ -469,7 +241,7 @@
     <EmbeddedResource Include="Resources\FilesCommonResource.pt.resx" Condition="$(Cultures.Contains('pt'))">
       <DependentUpon>FilesCommonResource.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\FilesCommonResource.resx">
+    <EmbeddedResource Update="Resources\FilesCommonResource.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilesCommonResource.Designer.cs</LastGenOutput>
@@ -495,7 +267,7 @@
     <EmbeddedResource Include="Resources\FilesCommonResource.zh-CN.resx" Condition="$(Cultures.Contains('zh-CN'))">
       <DependentUpon>FilesCommonResource.resx</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Resources\FilesCommonResource.Designer.cs">
+    <Compile Update="Resources\FilesCommonResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilesCommonResource.resx</DependentUpon>
@@ -548,7 +320,7 @@
     <EmbeddedResource Include="Resources\FilesJSResource.pt.resx" Condition="$(Cultures.Contains('pt'))">
       <DependentUpon>FilesJSResource.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\FilesJSResource.resx">
+    <EmbeddedResource Update="Resources\FilesJSResource.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilesJSResource.Designer.cs</LastGenOutput>
@@ -574,7 +346,7 @@
     <EmbeddedResource Include="Resources\FilesJSResource.zh-CN.resx" Condition="$(Cultures.Contains('zh-CN'))">
       <DependentUpon>FilesJSResource.resx</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Resources\FilesJSResource.Designer.cs">
+    <Compile Update="Resources\FilesJSResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilesJSResource.resx</DependentUpon>
@@ -627,7 +399,7 @@
     <EmbeddedResource Include="Resources\FilesUCResource.pt.resx" Condition="$(Cultures.Contains('pt'))">
       <DependentUpon>FilesUCResource.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\FilesUCResource.resx">
+    <EmbeddedResource Update="Resources\FilesUCResource.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilesUCResource.Designer.cs</LastGenOutput>
@@ -653,7 +425,7 @@
     <EmbeddedResource Include="Resources\FilesUCResource.zh-CN.resx" Condition="$(Cultures.Contains('zh-CN'))">
       <DependentUpon>FilesUCResource.resx</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Resources\FilesUCResource.Designer.cs">
+    <Compile Update="Resources\FilesUCResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilesUCResource.resx</DependentUpon>
@@ -706,7 +478,7 @@
     <EmbeddedResource Include="Services\NotifyService\FilesPatternResource.pt.resx" Condition="$(Cultures.Contains('pt'))">
       <DependentUpon>FilesPatternResource.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Services\NotifyService\FilesPatternResource.resx">
+    <EmbeddedResource Update="Services\NotifyService\FilesPatternResource.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FilesPatternResource.Designer.cs</LastGenOutput>
@@ -732,7 +504,7 @@
     <EmbeddedResource Include="Services\NotifyService\FilesPatternResource.zh-CN.resx" Condition="$(Cultures.Contains('zh-CN'))">
       <DependentUpon>FilesPatternResource.resx</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Services\NotifyService\FilesPatternResource.Designer.cs">
+    <Compile Update="Services\NotifyService\FilesPatternResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilesPatternResource.resx</DependentUpon>
@@ -956,225 +728,92 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ChunkUploadDialog\ChunkUploadDialog.ascx.cs">
+    <Compile Update="Controls\ChunkUploadDialog\ChunkUploadDialog.ascx.cs">
       <DependentUpon>ChunkUploadDialog.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ChunkUploadDialog\ChunkUploadDialog.ascx.designer.cs">
+    <Compile Update="Controls\ChunkUploadDialog\ChunkUploadDialog.ascx.designer.cs">
       <DependentUpon>ChunkUploadDialog.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ConvertFile\ConvertFile.ascx.cs">
+    <Compile Update="Controls\ConvertFile\ConvertFile.ascx.cs">
       <DependentUpon>ConvertFile.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ConvertFile\ConvertFile.ascx.designer.cs">
+    <Compile Update="Controls\ConvertFile\ConvertFile.ascx.designer.cs">
       <DependentUpon>ConvertFile.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Core\Entries\ChunkedUploadSession.cs" />
-    <Compile Include="HttpHandlers\ChunkedUploaderHandler.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\CreateMenu\CreateMenu.ascx.cs">
+    <Compile Update="Controls\CreateMenu\CreateMenu.ascx.cs">
       <DependentUpon>CreateMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\CreateMenu\CreateMenu.ascx.designer.cs">
+    <Compile Update="Controls\CreateMenu\CreateMenu.ascx.designer.cs">
       <DependentUpon>CreateMenu.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AccessRights\AccessRights.ascx.cs">
+    <Compile Update="Controls\AccessRights\AccessRights.ascx.cs">
       <DependentUpon>AccessRights.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\AccessRights\AccessRights.ascx.designer.cs">
+    <Compile Update="Controls\AccessRights\AccessRights.ascx.designer.cs">
       <DependentUpon>AccessRights.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ThirdParty\ThirdParty.ascx.cs">
+    <Compile Update="Controls\ThirdParty\ThirdParty.ascx.cs">
       <DependentUpon>ThirdParty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\ThirdParty\ThirdParty.ascx.designer.cs">
+    <Compile Update="Controls\ThirdParty\ThirdParty.ascx.designer.cs">
       <DependentUpon>ThirdParty.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EmptyFolder\EmptyFolder.ascx.cs">
+    <Compile Update="Controls\EmptyFolder\EmptyFolder.ascx.cs">
       <DependentUpon>EmptyFolder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\EmptyFolder\EmptyFolder.ascx.designer.cs">
+    <Compile Update="Controls\EmptyFolder\EmptyFolder.ascx.designer.cs">
       <DependentUpon>EmptyFolder.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainMenu\MainMenu.ascx.cs">
+    <Compile Update="Controls\MainMenu\MainMenu.ascx.cs">
       <DependentUpon>MainMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\MainMenu\MainMenu.ascx.designer.cs">
+    <Compile Update="Controls\MainMenu\MainMenu.ascx.designer.cs">
       <DependentUpon>MainMenu.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainContent\MainContent.ascx.cs">
+    <Compile Update="Controls\MainContent\MainContent.ascx.cs">
       <DependentUpon>MainContent.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\MainContent\MainContent.ascx.designer.cs">
+    <Compile Update="Controls\MainContent\MainContent.ascx.designer.cs">
       <DependentUpon>MainContent.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tree\Tree.ascx.cs">
+    <Compile Update="Controls\Tree\Tree.ascx.cs">
       <DependentUpon>Tree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\Tree\Tree.ascx.designer.cs">
+    <Compile Update="Controls\Tree\Tree.ascx.designer.cs">
       <DependentUpon>Tree.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tree\TreeBuilder.ascx.cs">
+    <Compile Update="Controls\Tree\TreeBuilder.ascx.cs">
       <DependentUpon>TreeBuilder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\Tree\TreeBuilder.ascx.designer.cs">
+    <Compile Update="Controls\Tree\TreeBuilder.ascx.designer.cs">
       <DependentUpon>TreeBuilder.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DocumentService\Configuration.cs" />
-    <Compile Include="Services\DocumentService\DocumentServiceConnector.cs" />
-    <Compile Include="Services\DocumentService\DocumentServiceHelper.cs" />
-    <Compile Include="Services\DocumentService\DocumentServiceParams.cs" />
-    <Compile Include="Services\DocumentService\DocumentServiceTracker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utils\ChunkedUploadSessionHolder.cs" />
-    <Compile Include="Services\DocumentService\DocbuilderReportsUtility.cs" />
-    <Compile Include="Utils\SocketManager.cs" />
-    <Compile Include="Utils\MailMergeTask.cs" />
-    <Compile Include="Utils\FileMarker.cs" />
-    <Compile Include="Utils\FileShareLink.cs" />
-    <Compile Include="Utils\FileConverter.cs" />
-    <Compile Include="Utils\EntryManager.cs" />
-    <Compile Include="Utils\FileSharing.cs" />
-    <Compile Include="Utils\FileTracker.cs" />
-    <Compile Include="Utils\FileUploader.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Controls\AccessRights\AccessRights.ascx" />
-    <Content Include="Controls\AccessRights\accessrights.js" />
-    <Content Include="Controls\AccessRights\accessrights.css" />
-    <Content Include="Controls\AccessRights\images\link_via.png" />
-    <Content Include="Controls\MainContent\MainContent.ascx" />
-    <Content Include="Controls\MainContent\maincontent.css" />
-    <Content Include="Controls\ConvertFile\ConvertFile.ascx" />
-    <Content Include="Controls\ConvertFile\convertfile.css" />
-    <Content Include="Controls\ConvertFile\convertfile.js" />
-    <Content Include="Controls\ConvertFile\images\convert_alert.png" />
-    <Content Include="Controls\ConvertFile\images\tree_action.png" />
-    <Content Include="Controls\ThirdParty\ThirdParty.ascx" />
-    <Content Include="Controls\ThirdParty\thirdparty.css" />
-    <Content Include="Controls\ThirdParty\thirdparty.js" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_box.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_dropbox.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_google.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_onedrivebusiness.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_owncloud.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_sharepoint.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_skydrive.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_webdav.png" />
-    <Content Include="Controls\ThirdParty\images\thirdparty_yandex.png" />
-    <Content Include="Controls\Tree\Tree.ascx" />
-    <Content Include="Controls\Tree\TreeBuilder.ascx" />
-    <Content Include="Controls\Tree\treebuilder.css" />
-    <Content Include="Controls\Tree\treebuilder.js" />
-    <Content Include="Controls\Tree\tree.css" />
-    <Content Include="Controls\Tree\tree.less" />
-    <Content Include="Controls\Tree\tree.js" />
-    <Content Include="Controls\Tree\images\loader_12.gif" />
-    <Content Include="Controls\Tree\images\loader_12_gray.gif" />
-    <Content Include="Controls\Tree\images\tree_action.png" />
-    <Content Include="Controls\CreateMenu\CreateMenu.ascx" />
-    <Content Include="Controls\CreateMenu\createmenu.js" />
-    <Content Include="Controls\EmptyFolder\EmptyFolder.ascx" />
-    <Content Include="Controls\EmptyFolder\emptyfolder.css" />
-    <Content Include="Controls\EmptyFolder\emptyfolder.js" />
-    <Content Include="Controls\EmptyFolder\images\btn_emptyfolder.png" />
-    <Content Include="Controls\MainMenu\MainMenu.ascx" />
-    <Content Include="Controls\ChunkUploadDialog\ChunkUploadDialog.ascx" />
-    <Content Include="Controls\ChunkUploadDialog\chunkuploaddialog.css" />
-    <Content Include="Controls\ChunkUploadDialog\images\uploader_progress.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="js\actionmanager.js" />
-    <Content Include="js\common.js" />
-    <Content Include="js\auth.js" />
-    <Content Include="js\anchormanager.js" />
-    <Content Include="js\mousemanager.js" />
-    <Content Include="js\markernew.js" />
-    <Content Include="js\editor.js" />
-    <Content Include="js\filter.js" />
-    <Content Include="js\eventhandler.js" />
-    <Content Include="js\foldermanager.js" />
-    <Content Include="js\servicemanager.js" />
-    <Content Include="js\socketmanager.js" />
-    <Content Include="js\templatemanager.js" />
-    <Content Include="js\ui.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Themes\bright-blue\leftmenu.less" />
-    <Content Include="App_Themes\dark-green\leftmenu.less" />
-    <Content Include="App_Themes\deep-blue\leftmenu.less" />
-    <Content Include="App_Themes\default\leftmenu.less" />
-    <Content Include="App_Themes\pure-orange\leftmenu.less" />
-    <Content Include="App_Themes\wild-pink\leftmenu.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Themes\default\app.css" />
-    <Content Include="App_Themes\default\common.css" />
-    <Content Include="App_Themes\default\filechoice.css" />
-    <Content Include="App_Themes\default\images\corporatefiles_big.png" />
-    <Content Include="App_Themes\default\images\empty_screen_corporate.png" />
-    <Content Include="App_Themes\default\images\empty_screen_filter.png" />
-    <Content Include="App_Themes\default\images\empty_screen_forme.png" />
-    <Content Include="App_Themes\default\images\empty_screen_my.png" />
-    <Content Include="App_Themes\default\images\empty_screen_project.png" />
-    <Content Include="App_Themes\default\images\empty_screen_trash.png" />
-    <Content Include="App_Themes\default\images\product_disabled_logo.png" />
-    <Content Include="App_Themes\default\images\product_logo.png" />
     <Content Include="App_Themes\default\images\product_logolarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HttpHandlers\thirdpartyapphandler.ashx" />
+    <ProjectReference Include="..\..\..\..\..\common\ASC.Common\ASC.Common.csproj" />
+    <ProjectReference Include="..\..\..\..\..\common\ASC.Core.Common\ASC.Core.Common.csproj" />
+    <ProjectReference Include="..\..\..\..\..\common\ASC.Data.Storage\ASC.Data.Storage.csproj" />
+    <ProjectReference Include="..\..\..\..\..\module\ASC.Api\ASC.Api\ASC.Api.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\module\ASC.ElasticSearch\ASC.ElasticSearch.csproj" />
+    <ProjectReference Include="..\..\..\..\..\module\ASC.MessagingSystem\ASC.MessagingSystem.csproj" />
+    <ProjectReference Include="..\..\..\..\..\module\ASC.Thrdparty\ASC.FederatedLogin\ASC.FederatedLogin.csproj" />
+    <ProjectReference Include="..\..\..\..\core\ASC.Web.Core\ASC.Web.Core.csproj" />
+    <ProjectReference Include="..\..\ASC.Web.Studio.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\common\ASC.Common\ASC.Common.csproj">
-      <Name>ASC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\common\ASC.Core.Common\ASC.Core.Common.csproj">
-      <Project>{a51d0454-4afa-46de-89d4-b03d37e1816c}</Project>
-      <Name>ASC.Core.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\common\ASC.Data.Storage\ASC.Data.Storage.csproj">
-      <Project>{3f6b420f-abd3-4b5a-9f4c-5d61ffbb01de}</Project>
-      <Name>ASC.Data.Storage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\module\ASC.Api\ASC.Api\ASC.Api.Core.csproj">
-      <Project>{49f07fff-98a5-47d2-a9e9-a46b98c41245}</Project>
-      <Name>ASC.Api.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\module\ASC.ElasticSearch\ASC.ElasticSearch.csproj">
-      <Project>{ae1a0e06-6cd4-4e1d-8209-22bbbd6d5652}</Project>
-      <Name>ASC.ElasticSearch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\module\ASC.MessagingSystem\ASC.MessagingSystem.csproj">
-      <Project>{bd8a18a5-60c5-4411-9719-0aa11b4be0e9}</Project>
-      <Name>ASC.MessagingSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\module\ASC.Thrdparty\ASC.FederatedLogin\ASC.FederatedLogin.csproj">
-      <Project>{481b0d9c-b2f8-4de9-8597-ba8d24585099}</Project>
-      <Name>ASC.FederatedLogin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\core\ASC.Web.Core\ASC.Web.Core.csproj">
-      <Project>{02c40a64-fe22-41d0-9037-69f0d6f787a9}</Project>
-      <Name>ASC.Web.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ASC.Web.Studio.csproj">
-      <Project>{e7be6ce8-f6b0-4b9b-831b-ba0c85c8d130}</Project>
-      <Name>ASC.Web.Studio</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Warmup.aspx" />
-    <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -1186,30 +825,184 @@
     <PackageReference Include="Autofac">
       <Version>6.2.0</Version>
     </PackageReference>
-    <PackageReference Include="DocuSign.eSign.dll">
-      <Version>2.1.8.1</Version>
-    </PackageReference>
     <PackageReference Include="JWT">
       <Version>8.2.3</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
-      <Version>4.0.20505</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="RestSharp">
-      <Version>106.12.0</Version>
     </PackageReference>
     <PackageReference Include="SharpZipLib">
       <Version>1.3.2</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.346201">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="DocuSign.eSign.dll" Version="3.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web.Services" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ar-AE.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.az-Latn-AZ.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.be.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.bg.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.bs-BA.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ca.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.cs.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.da.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.de.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.el.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.es.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.et.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.eu-ES.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.fa.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.fi.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.fr.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ga.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.he.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.hi.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.hr.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.hu.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.id.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.it.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ja.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ka.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.kk.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ko.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.lt.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.lv.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.nb-NO.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.nl.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.pl.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.pt-BR.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.pt.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ro.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.ru.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.sk.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.sl.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.sv.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.tg-Cyrl-TJ.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.tr.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.uk.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.vi.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.zh-CN.resx" />
+    <EmbeddedResource Remove="Resources\FilesCommonResource.zh-TW.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ar-AE.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.az-Latn-AZ.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.bg.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.bs-BA.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.cs.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.da.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.de.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.el.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.es.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.fa.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.fi.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.fr.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ga.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.he.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.hi.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.hr.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.hu.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.id.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.it.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ja.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.kk.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ko.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.lt.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.lv.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.nb-NO.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.nl.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.pl.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.pt-BR.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.pt.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ro.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.ru.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.sk.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.sl.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.sv.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.tr.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.uk.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.vi.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.zh-CN.resx" />
+    <EmbeddedResource Remove="Resources\FilesJSResource.zh-TW.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ar-AE.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.az-Latn-AZ.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.bg.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.cs.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.da.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.de.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.el.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.es.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.et.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.eu-ES.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.fa.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.fi.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.fr.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ga.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.he.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.hi.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.hr.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.hu.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.id.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.it.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ja.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ka.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.kk.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ko.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.lt.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.lv.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.nb-NO.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.nl.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.pl.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.pt-BR.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.pt.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ro.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.ru.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.sk.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.sl.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.sv.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.tr.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.uk.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.vi.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.zh-CN.resx" />
+    <EmbeddedResource Remove="Resources\FilesUCResource.zh-TW.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.az-Latn-AZ.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.bg.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.bs-BA.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.ca.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.cs.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.da.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.de.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.el.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.es.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.et.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.eu-ES.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.fi.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.fr.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.he.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.hi.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.hu.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.id.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.it.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.ja.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.kk.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.ko.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.lt.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.lv.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.nb-NO.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.nl.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.pl.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.pt-BR.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.pt.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.ro.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.ru.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.sk.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.sl.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.sr-Latn-CS.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.sv.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.tr.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.uk.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.vi.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.zh-CN.resx" />
+    <EmbeddedResource Remove="Services\NotifyService\FilesPatternResource.zh-TW.resx" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -1228,5 +1021,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 </Project>

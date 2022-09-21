@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 
 using ASC.ActiveDirectory.Base.Settings;
 using ASC.Api.Attributes;
@@ -33,6 +32,7 @@ using ASC.Web.Studio.Core;
 using ASC.Web.Studio.UserControls.Management.SingleSignOnSettings;
 using ASC.Web.Studio.UserControls.Users.UserProfile;
 using ASC.Web.Studio.Utility;
+using ASC.Specific;
 
 namespace ASC.Specific.CapabilitiesApi
 {
@@ -103,7 +103,7 @@ namespace ASC.Specific.CapabilitiesApi
                                                          .Where(loginProvider =>
                                                              {
                                                                  if ((loginProvider == ProviderConstants.Facebook || loginProvider == ProviderConstants.AppleId)
-                                                                    && CoreContext.Configuration.Standalone && HttpContext.Current.Request.MobileApp())
+                                                                    && CoreContext.Configuration.Standalone && HttpContextHelper.Current.Request.MobileApp())
                                                                  {
                                                                      return false;
                                                                  }
@@ -128,7 +128,7 @@ namespace ASC.Specific.CapabilitiesApi
 
                     if (settings.EnableSso)
                     {
-                        var uri = HttpContext.Current.Request.GetUrlRewriter();
+                        var uri = HttpContextHelper.Current.Request.GetUrlRewriter();
 
                         var configUrl = GetAppSettings("web.sso.saml.login.url", "");
 

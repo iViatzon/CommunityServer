@@ -20,8 +20,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Web.Configuration;
-using System.Web.Hosting;
 
 using ASC.Common.Caching;
 using ASC.Core;

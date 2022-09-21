@@ -43,6 +43,7 @@ using ASC.Web.Studio.Utility;
 
 using File = ASC.Files.Core.File;
 using SecurityContext = ASC.Core.SecurityContext;
+using ASC.Web.Files;
 
 namespace ASC.Web.Files.Utils
 {
@@ -199,7 +200,7 @@ namespace ASC.Web.Files.Utils
                     Account = SecurityContext.CurrentAccount,
                     Delete = deleteAfter,
                     StartDateTime = DateTime.Now,
-                    Url = HttpContext.Current != null ? HttpContext.Current.Request.GetUrlRewriter().ToString() : null,
+                    Url = HttpContextHelper.Current != null ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() : null,
                     Password = password
                 };
                 conversionQueue.Add(file, queueResult);
@@ -330,9 +331,9 @@ namespace ASC.Web.Files.Utils
                                 account = operationResult.Account;
                                 password = operationResult.Password;
 
-                                if (HttpContext.Current == null && !WorkContext.IsMono)
+                                if (HttpContextHelper.Current == null && !WorkContext.IsMono)
                                 {
-                                    HttpContext.Current = new HttpContext(
+                                    HttpContextHelper.Current = new HttpContext(
                                         new HttpRequest("hack", operationResult.Url, string.Empty),
                                         new HttpResponse(new StringWriter()));
                                 }

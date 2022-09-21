@@ -19,8 +19,6 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Optimization;
 
 using ASC.Core;
 using ASC.Data.Storage;
@@ -29,6 +27,7 @@ using ASC.Data.Storage.GoogleCloud;
 using ASC.Data.Storage.RackspaceCloud;
 using ASC.Data.Storage.S3;
 using ASC.Data.Storage.Selectel;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Client.Bundling
 {
@@ -62,7 +61,7 @@ namespace ASC.Web.Core.Client.Bundling
             BundleTable.Bundles.Add(bundle);
             if (DiscTransform.SuccessInitialized || StaticUploader.CanUpload())
             {
-                bundle.GenerateBundleResponse(new BundleContext(new HttpContextWrapper(HttpContext.Current), BundleTable.Bundles, bundle.Path));
+                bundle.GenerateBundleResponse(new BundleContext(new HttpContextWrapper(HttpContextHelper.Current), BundleTable.Bundles, bundle.Path));
             }
         }
 
@@ -118,9 +117,9 @@ namespace ASC.Web.Core.Client.Bundling
             {
                 if (uri.StartsWith("/"))
                 {
-                    if (HttpContext.Current != null && uri.StartsWith(HttpContext.Current.Request.ApplicationPath))
+                    if (HttpContextHelper.Current != null && uri.StartsWith(HttpContextHelper.Current.Request.ApplicationPath))
                     {
-                        uri = "/" + uri.Substring(HttpContext.Current.Request.ApplicationPath.Length).TrimStart('/');
+                        uri = "/" + uri.Substring(HttpContextHelper.Current.Request.ApplicationPath.Length).TrimStart('/');
                     }
                     return "~" + uri;
                 }
@@ -215,9 +214,9 @@ namespace ASC.Web.Core.Client.Bundling
             public override Bundle Include(string path)
             {
                 var minify = true;
-                if (HttpContext.Current != null)
+                if (HttpContextHelper.Current != null)
                 {
-                    var filePath = HttpContext.Current.Server.MapPath(path);
+                    var filePath = HttpContextHelper.Current.Server.MapPath(path);
                     if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath.Replace(".css", ".min.css").Replace(".less", ".min.css")))
                     {
                         minify = false;

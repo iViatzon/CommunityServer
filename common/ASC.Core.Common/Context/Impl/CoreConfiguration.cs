@@ -18,12 +18,12 @@
 using System;
 using System.Configuration;
 using System.Text;
-using System.Web;
 
 using ASC.Core.Configuration;
 using ASC.Core.Tenants;
 
 using Newtonsoft.Json;
+using ASC.Core.Common;
 
 namespace ASC.Core
 {
@@ -52,7 +52,7 @@ namespace ASC.Core
             get
             {
                 //todo: should replace only frotend
-                if (CustomMode && HttpContext.Current != null && HttpContext.Current.Request.SailfishApp()) return true;
+                if (CustomMode && HttpContextHelper.Current != null && HttpContextHelper.Current.Request.SailfishApp()) return true;
 
                 return personal ?? (bool)(personal = ConfigurationManagerExtension.AppSettings["core.personal"] == "true");
             }

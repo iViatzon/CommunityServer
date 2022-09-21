@@ -21,10 +21,10 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
-using System.Web;
 
 using ASC.Core.Billing;
 using ASC.Core.Tenants;
+using ASC.Core.Common;
 
 
 namespace ASC.Core
@@ -141,13 +141,13 @@ namespace ASC.Core
         public Tenant GetCurrentTenant(bool throwIfNotFound)
         {
             Tenant tenant = null;
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                tenant = HttpContext.Current.Items[CURRENT_TENANT] as Tenant;
-                if (tenant == null && HttpContext.Current.Request != null)
+                tenant = HttpContextHelper.Current.Items[CURRENT_TENANT] as Tenant;
+                if (tenant == null && HttpContextHelper.Current.Request != null)
                 {
-                    tenant = GetTenant(HttpContext.Current.Request.GetUrlRewriter().Host);
-                    HttpContext.Current.Items[CURRENT_TENANT] = tenant;
+                    tenant = GetTenant(HttpContextHelper.Current.Request.GetUrlRewriter().Host);
+                    HttpContextHelper.Current.Items[CURRENT_TENANT] = tenant;
                 }
             }
             if (tenant == null)
@@ -166,9 +166,9 @@ namespace ASC.Core
             if (tenant != null)
             {
                 CallContext.SetData(CURRENT_TENANT, tenant);
-                if (HttpContext.Current != null)
+                if (HttpContextHelper.Current != null)
                 {
-                    HttpContext.Current.Items[CURRENT_TENANT] = tenant;
+                    HttpContextHelper.Current.Items[CURRENT_TENANT] = tenant;
                 }
                 Thread.CurrentThread.CurrentCulture = tenant.GetCulture();
                 Thread.CurrentThread.CurrentUICulture = tenant.GetCulture();

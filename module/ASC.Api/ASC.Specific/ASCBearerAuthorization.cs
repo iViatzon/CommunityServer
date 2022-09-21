@@ -17,7 +17,6 @@
 
 using System;
 using System.Net;
-using System.Web;
 
 using ASC.Api.Interfaces;
 using ASC.Common.Logging;

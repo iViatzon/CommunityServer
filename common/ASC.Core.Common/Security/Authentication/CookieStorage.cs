@@ -17,12 +17,12 @@
 
 using System;
 using System.Globalization;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Core.Tenants;
 using ASC.MessagingSystem;
 using ASC.Security.Cryptography;
+using ASC.Core.Common;
 
 namespace ASC.Core.Security.Authentication
 {
@@ -124,10 +124,10 @@ namespace ASC.Core.Security.Authentication
             var data = string.Empty;
             try
             {
-                if (HttpContext.Current != null && HttpContext.Current.Request != null)
+                if (HttpContextHelper.Current != null && HttpContextHelper.Current.Request != null)
                 {
-                    var forwarded = HttpContext.Current.Request.Headers["X-Forwarded-For"];
-                    data = string.IsNullOrEmpty(forwarded) ? HttpContext.Current.Request.UserHostAddress : forwarded.Split(':')[0];
+                    var forwarded = HttpContextHelper.Current.Request.Headers["X-Forwarded-For"];
+                    data = string.IsNullOrEmpty(forwarded) ? HttpContextHelper.Current.Request.UserHostAddress : forwarded.Split(':')[0];
                 }
             }
             catch { }

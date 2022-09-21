@@ -27,6 +27,7 @@ using ASC.Common.Threading;
 using ASC.Core;
 using ASC.Web.Files.Classes;
 using ASC.Web.Studio.Utility;
+using ASC.Web.Files;
 
 namespace ASC.Web.Files.Services.DocumentService
 {
@@ -81,7 +82,7 @@ namespace ASC.Web.Files.Services.DocumentService
             TaskInfo = new DistributedTask();
             TenantId = TenantProvider.CurrentTenantID;
             UserId = SecurityContext.CurrentAccount.ID;
-            ContextUrl = HttpContext.Current != null ? HttpContext.Current.Request.GetUrlRewriter().ToString() : null;
+            ContextUrl = HttpContextHelper.Current != null ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() : null;
             Obj = obj;
         }
 
@@ -110,9 +111,9 @@ namespace ASC.Web.Files.Services.DocumentService
                 Status = ReportStatus.Started;
                 PublishTaskInfo();
 
-                if (HttpContext.Current == null && !WorkContext.IsMono && !string.IsNullOrEmpty(ContextUrl))
+                if (HttpContextHelper.Current == null && !WorkContext.IsMono && !string.IsNullOrEmpty(ContextUrl))
                 {
-                    HttpContext.Current = new HttpContext(
+                    HttpContextHelper.Current = new HttpContext(
                         new HttpRequest("hack", ContextUrl, string.Empty),
                         new HttpResponse(new System.IO.StringWriter()));
                 }

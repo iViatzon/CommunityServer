@@ -18,9 +18,9 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Web;
 
 using ASC.Core.Common.Settings;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Utility
 {
@@ -62,7 +62,7 @@ namespace ASC.Web.Core.Utility
 
             try
             {
-                var filePath = HttpContext.Current.Server.MapPath(resolvedPath);
+                var filePath = HttpContextHelper.Current.Server.MapPath(resolvedPath);
                 if (!File.Exists(filePath))
                     throw new FileNotFoundException("", path);
             }
@@ -73,7 +73,7 @@ namespace ASC.Web.Core.Utility
                 if (!VirtualPathUtility.IsAbsolute(resolvedPath))
                     resolvedPath = VirtualPathUtility.ToAbsolute(resolvedPath);
 
-                var filePath = HttpContext.Current.Server.MapPath(resolvedPath);
+                var filePath = HttpContextHelper.Current.Server.MapPath(resolvedPath);
 
                 if (!File.Exists(filePath))
                     throw new FileNotFoundException("", path);
@@ -104,7 +104,7 @@ namespace ASC.Web.Core.Utility
 
             try
             {
-                var filePath = HttpContext.Current.Server.MapPath(resolvedPath);
+                var filePath = HttpContextHelper.Current.Server.MapPath(resolvedPath);
                 if (Directory.Exists(filePath))
                 {
                     settings.Save();

@@ -17,7 +17,6 @@
 
 using System;
 using System.Linq;
-using System.Web;
 
 using ASC.Common.Data;
 using ASC.Common.Data.Sql;
@@ -25,6 +24,7 @@ using ASC.Common.Data.Sql.Expressions;
 using ASC.Common.Logging;
 
 using LogManager = ASC.Common.Logging.BaseLogManager;
+using ASC.Common;
 
 namespace ASC.Geolocation
 {
@@ -92,7 +92,7 @@ namespace ASC.Geolocation
 
         public IPGeolocationInfo GetIPGeolocationFromHttpContext()
         {
-            return GetIPGeolocationFromHttpContext(HttpContext.Current);
+            return GetIPGeolocationFromHttpContext(HttpContextHelper.Current);
         }
 
         public IPGeolocationInfo GetIPGeolocationFromHttpContext(HttpContext context)

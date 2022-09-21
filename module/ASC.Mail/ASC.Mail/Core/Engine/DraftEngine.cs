@@ -25,7 +25,6 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Core;
@@ -46,6 +45,7 @@ using ASC.Mail.Utils;
 using MimeKit;
 
 using MailMessage = ASC.Mail.Data.Contracts.MailMessageData;
+using ASC.Mail;
 
 namespace ASC.Mail.Core.Engine
 {
@@ -227,18 +227,18 @@ namespace ASC.Mail.Core.Engine
 
             DaemonLabels = translates ?? DeliveryFailureMessageTranslates.Defauilt;
 
-            var scheme = HttpContext.Current == null
+            var scheme = HttpContextHelper.Current == null
                 ? Uri.UriSchemeHttp
-                : HttpContext.Current.Request.GetUrlRewriter().Scheme;
+                : HttpContextHelper.Current.Request.GetUrlRewriter().Scheme;
 
-            var currentUrl = HttpContext.Current != null ? HttpContext.Current.Request.GetUrlRewriter().ToString() : null;
+            var currentUrl = HttpContextHelper.Current != null ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() : null;
             Task.Run(() =>
             {
                 try
                 {
-                    if (HttpContext.Current == null && !WorkContext.IsMono)
+                    if (HttpContextHelper.Current == null && !WorkContext.IsMono)
                     {
-                        HttpContext.Current = new HttpContext(
+                        HttpContextHelper.Current = new HttpContext(
                             new HttpRequest("hack", currentUrl, string.Empty),
                             new HttpResponse(new StringWriter()));
                     }
@@ -289,21 +289,21 @@ namespace ASC.Mail.Core.Engine
             message.CcList = ValidateAddresses(DraftFieldTypes.Cc, draft.Cc, !draft.To.Any() && draft.Cc.Any());
             message.BccList = ValidateAddresses(DraftFieldTypes.Bcc, draft.Bcc, !draft.To.Any() && draft.Bcc.Any());
 
-            var scheme = HttpContext.Current == null
+            var scheme = HttpContextHelper.Current == null
                 ? Uri.UriSchemeHttp
-                : HttpContext.Current.Request.GetUrlRewriter().Scheme;
+                : HttpContextHelper.Current.Request.GetUrlRewriter().Scheme;
 
             SetDraftSending(draft);
 
-            var currentUrl = HttpContext.Current != null ? HttpContext.Current.Request.GetUrlRewriter().ToString() : null;
+            var currentUrl = HttpContextHelper.Current != null ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() : null;
 
             Task.Run(() =>
             {
                 try
                 {
-                    if (HttpContext.Current == null && !WorkContext.IsMono)
+                    if (HttpContextHelper.Current == null && !WorkContext.IsMono)
                     {
-                        HttpContext.Current = new HttpContext(
+                        HttpContextHelper.Current = new HttpContext(
                             new HttpRequest("hack", currentUrl, string.Empty),
                             new HttpResponse(new StringWriter()));
                     }

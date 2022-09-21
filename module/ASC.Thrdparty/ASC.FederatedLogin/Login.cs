@@ -20,10 +20,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.Security;
-using System.Web.Services;
 
 using ASC.FederatedLogin.Helpers;
 using ASC.FederatedLogin.LoginProviders;

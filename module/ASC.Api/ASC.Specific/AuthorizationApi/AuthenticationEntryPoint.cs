@@ -20,7 +20,6 @@ using System.Globalization;
 using System.Security;
 using System.Security.Authentication;
 using System.Threading;
-using System.Web;
 
 using ASC.ActiveDirectory;
 using ASC.ActiveDirectory.Base.Settings;
@@ -53,6 +52,7 @@ using ASC.Web.Studio.Utility;
 
 using Constants = ASC.Core.Configuration.Constants;
 using SecurityContext = ASC.Core.SecurityContext;
+using ASC.Specific;
 
 namespace ASC.Specific.AuthorizationApi
 {
@@ -75,7 +75,7 @@ namespace ASC.Specific.AuthorizationApi
 
         private static HttpRequest Request
         {
-            get { return HttpContext.Current.Request; }
+            get { return HttpContextHelper.Current.Request; }
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace ASC.Specific.AuthorizationApi
             bool viaEmail;
             var user = GetUser(userName, password, provider, accessToken, out viaEmail);
             mobilePhone = SmsManager.SaveMobilePhone(user, mobilePhone);
-            MessageService.Send(HttpContext.Current.Request, MessageAction.UserUpdatedMobileNumber, MessageTarget.Create(user.ID), user.DisplayUserName(false), mobilePhone);
+            MessageService.Send(HttpContextHelper.Current.Request, MessageAction.UserUpdatedMobileNumber, MessageTarget.Create(user.ID), user.DisplayUserName(false), mobilePhone);
 
             return new AuthenticationTokenData
             {

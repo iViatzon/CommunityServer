@@ -16,7 +16,7 @@
 
 
 using System;
-using System.Web;
+using ASC.FederatedLogin;
 
 namespace ASC.FederatedLogin.Helpers
 {
@@ -42,9 +42,9 @@ namespace ASC.FederatedLogin.Helpers
 
         public static void AppendXrdsHeader(string handlerVirtualPath)
         {
-            HttpContext.Current.Response.AppendHeader(
+            HttpContextHelper.Current.Response.AppendHeader(
                 "X-XRDS-Location",
-                new Uri(HttpContext.Current.Request.GetUrlRewriter(), HttpContext.Current.Response.ApplyAppPathModifier(handlerVirtualPath)).AbsoluteUri);
+                new Uri(HttpContextHelper.Current.Request.GetUrlRewriter(), HttpContextHelper.Current.Response.ApplyAppPathModifier(handlerVirtualPath)).AbsoluteUri);
         }
     }
 }

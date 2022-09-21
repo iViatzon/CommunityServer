@@ -45,7 +45,7 @@ using Twilio.TwiML;
 namespace ASC.Web.CRM.Classes
 {
     [ValidateRequest]
-    public class TwilioController : ApiController
+    public class TwilioController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private static readonly ILog Log = LogManager.GetLogger("ASC");
         private static readonly object LockObj = new object();
@@ -484,9 +484,9 @@ namespace ASC.Web.CRM.Classes
         internal VoiceResponse VoiceMail() { return GetTwilioResponseHelper().VoiceMail(); }
     }
 
-    public class ValidateRequestAttribute : ActionFilterAttribute
+    public class ValidateRequestAttribute : Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext filterContext)
         {
             if (!new RequestValidationHelper().IsValidRequest(filterContext.HttpContext, ConsumerFactory.Get<Web.Core.Sms.TwilioProvider>()["twilioAuthToken"], HttpContext.Current.Request.GetUrlRewriter().AbsoluteUri))
                 filterContext.Result = new Twilio.AspNet.Mvc.HttpStatusCodeResult(HttpStatusCode.Forbidden);

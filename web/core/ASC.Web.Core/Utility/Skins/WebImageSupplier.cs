@@ -16,9 +16,9 @@
 
 
 using System;
-using System.Web;
 
 using ASC.Data.Storage;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Utility.Skins
 {
@@ -41,7 +41,7 @@ namespace ASC.Web.Core.Utility.Skins
 
         public static string GetImageFolderAbsoluteWebPath(Guid moduleID)
         {
-            if (HttpContext.Current == null) return string.Empty;
+            if (HttpContextHelper.Current == null) return string.Empty;
 
             var currentThemePath = GetPartImageFolderRel(moduleID);
             return WebPath.GetPath(currentThemePath);

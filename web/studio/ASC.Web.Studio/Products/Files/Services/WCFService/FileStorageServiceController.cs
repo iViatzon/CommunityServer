@@ -61,12 +61,13 @@ using File = ASC.Files.Core.File;
 using FileShare = ASC.Files.Core.Security.FileShare;
 using SecurityContext = ASC.Core.SecurityContext;
 using UrlShortener = ASC.Web.Core.Utility.UrlShortener;
+using ASC.Web.Files;
 
 namespace ASC.Web.Files.Services.WCFService
 {
     [Authorize]
     [FileExceptionFilter]
-    public class FileStorageServiceController : ApiController, IFileStorageService
+    public class FileStorageServiceController : Microsoft.AspNetCore.Mvc.ControllerBase, IFileStorageService
     {
         private static readonly FileOperationsManager fileOperations = new FileOperationsManager();
         private static readonly FileEntrySerializer serializer = new FileEntrySerializer();
@@ -1774,7 +1775,7 @@ namespace ASC.Web.Files.Services.WCFService
                 tagDao.SaveTags(tags);
                 foreach (var entry in entries)
                 {
-                    FilesMessageService.Send(entry, HttpContext.Current.Request, MessageAction.FileMarkedAsFavorite, entry.Title);
+                    FilesMessageService.Send(entry, HttpContextHelper.Current.Request, MessageAction.FileMarkedAsFavorite, entry.Title);
                 }
 
                 return new ItemList<FileEntry>(entries);
@@ -1803,7 +1804,7 @@ namespace ASC.Web.Files.Services.WCFService
 
                 foreach (var entry in entries)
                 {
-                    FilesMessageService.Send(entry, HttpContext.Current.Request, MessageAction.FileRemovedFromFavorite, entry.Title);
+                    FilesMessageService.Send(entry, HttpContextHelper.Current.Request, MessageAction.FileRemovedFromFavorite, entry.Title);
                 }
 
                 return new ItemList<FileEntry>(entries);
@@ -2672,12 +2673,12 @@ namespace ASC.Web.Files.Services.WCFService
             {
                 return Request.Headers.ToDictionary(h => h.Key, h => string.Join(", ", h.Value.ToArray()));
             }
-            else if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.Headers != null)
+            else if (HttpContextHelper.Current != null && HttpContextHelper.Current.Request != null && HttpContextHelper.Current.Request.Headers != null)
             {
                 var headers = new Dictionary<string, string>();
-                foreach (var k in HttpContext.Current.Request.Headers.AllKeys)
+                foreach (var k in HttpContextHelper.Current.Request.Headers.AllKeys)
                 {
-                    headers[k] = string.Join(", ", HttpContext.Current.Request.Headers.GetValues(k));
+                    headers[k] = string.Join(", ", HttpContextHelper.Current.Request.Headers.GetValues(k));
                 }
                 return headers;
             }

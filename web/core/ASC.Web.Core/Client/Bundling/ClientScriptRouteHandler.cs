@@ -22,10 +22,9 @@ using System.Net;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Routing;
 
 using ASC.Common.Logging;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Client.Bundling
 {
@@ -43,7 +42,7 @@ namespace ASC.Web.Core.Client.Bundling
             {
                 try
                 {
-                    HttpContext.Current = context;
+                    HttpContextHelper.Current = context;
                     var clientScriptReference = new ClientScriptReference();
                     var version = clientScriptReference.GetContentHash(context.Request.Url.AbsolutePath);
                     if (string.Equals(context.Request.Headers["If-None-Match"], version))

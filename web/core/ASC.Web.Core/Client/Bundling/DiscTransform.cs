@@ -23,14 +23,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Web;
-using System.Web.Optimization;
 
 using ASC.Common.Logging;
 using ASC.Core;
 using ASC.Data.Storage;
 using ASC.Data.Storage.Configuration;
 using ASC.Data.Storage.DiscStorage;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Client.Bundling
 {
@@ -230,12 +229,12 @@ namespace ASC.Web.Core.Client.Bundling
 
         private static string GetFullPhysicalPath(string path)
         {
-            return Path.GetFullPath(Path.Combine(HttpContext.Current.Server.MapPath("~/"), BaseStoragePath, path.TrimStart('/')));
+            return Path.GetFullPath(Path.Combine(HttpContextHelper.Current.Server.MapPath("~/"), BaseStoragePath, path.TrimStart('/')));
         }
 
         private static string GetFullStaticPhysicalPath(string path)
         {
-            return Path.GetFullPath(Path.Combine(HttpContext.Current.Server.MapPath("~/"), "App_Data/static/bundle/", path.TrimStart('/')));
+            return Path.GetFullPath(Path.Combine(HttpContextHelper.Current.Server.MapPath("~/"), "App_Data/static/bundle/", path.TrimStart('/')));
         }
 
         private static void CreateDir(string path)

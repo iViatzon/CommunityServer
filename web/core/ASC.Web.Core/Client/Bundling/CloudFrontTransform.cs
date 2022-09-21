@@ -24,7 +24,6 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Web.Optimization;
 
 using Amazon;
 using Amazon.S3;

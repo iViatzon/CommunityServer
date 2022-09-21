@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 
 using ASC.Common.Logging;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core
 {
@@ -31,7 +31,7 @@ namespace ASC.Web.Core
         protected virtual List<string> Exclude { get; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            var path = Path.GetDirectoryName(HttpContext.Current.Request.PhysicalPath);
+            var path = Path.GetDirectoryName(HttpContextHelper.Current.Request.PhysicalPath);
 
             var files = Directory.GetFiles(path, "*.aspx", SearchOption.TopDirectoryOnly)
                 .Select(r => Path.GetFileName(r))
@@ -53,7 +53,7 @@ namespace ASC.Web.Core
                 var page = Path.GetFileName(file);
                 try
                 {
-                    HttpContext.Current.Server.Execute(page);
+                    HttpContextHelper.Current.Server.Execute(page);
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +61,7 @@ namespace ASC.Web.Core
                 }
             }
 
-            HttpContext.Current.Response.Clear();
+            HttpContextHelper.Current.Response.Clear();
         }
     }
 }

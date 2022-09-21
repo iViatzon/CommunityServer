@@ -21,11 +21,11 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Core;
 using ASC.Core.Tenants;
+using ASC.IPSecurity;
 
 namespace ASC.IPSecurity
 {
@@ -53,7 +53,7 @@ namespace ASC.IPSecurity
         {
             if (!IpSecurityEnabled) return true;
 
-            var httpContext = HttpContext.Current;
+            var httpContext = HttpContextHelper.Current;
             if (httpContext == null) return true;
 
             if (tenant == null || SecurityContext.CurrentAccount.ID == tenant.OwnerId) return true;

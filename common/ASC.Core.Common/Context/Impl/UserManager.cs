@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 using ASC.Common.Caching;
 using ASC.Common.Logging;
@@ -27,6 +26,7 @@ using ASC.Core.Caching;
 using ASC.Core.Tenants;
 using ASC.Core.Users;
 using ASC.Security.Cryptography;
+using ASC.Core.Common;
 
 namespace ASC.Core
 {
@@ -250,7 +250,7 @@ namespace ASC.Core
             {
                 var tenant = CoreContext.TenantManager.GetCurrentTenant();
                 var cardDavAB = new CardDavAddressbook();
-                var myUri = (HttpContext.Current != null) ? HttpContext.Current.Request.GetUrlRewriter().ToString() :
+                var myUri = (HttpContextHelper.Current != null) ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() :
                             (Cache.Get<string>("REWRITE_URL" + tenant.TenantId) != null) ?
                             new Uri(Cache.Get<string>("REWRITE_URL" + tenant.TenantId)).ToString() : tenant.GetTenantDomain();
 
@@ -343,7 +343,7 @@ namespace ASC.Core
                 var userAuthorization = curreMail + ":" + currentAccountPaswd;
                 var cardDavAddBook = new CardDavAddressbook();
                 var rootAuthorization = cardDavAddBook.GetSystemAuthorization();
-                var myUri = (HttpContext.Current != null) ? HttpContext.Current.Request.GetUrlRewriter().ToString() :
+                var myUri = (HttpContextHelper.Current != null) ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() :
                     (Cache.Get<string>("REWRITE_URL" + tenant.TenantId) != null) ?
                     new Uri(Cache.Get<string>("REWRITE_URL" + tenant.TenantId)).ToString() : tenant.GetTenantDomain();
                 var davUsersEmails = CoreContext.UserManager.GetDavUserEmails();
@@ -509,7 +509,7 @@ namespace ASC.Core
             if (groupId == Constants.GroupVisitor.ID)
             {
                 var tenant = CoreContext.TenantManager.GetCurrentTenant();
-                var myUri = (HttpContext.Current != null) ? HttpContext.Current.Request.GetUrlRewriter().ToString() :
+                var myUri = (HttpContextHelper.Current != null) ? HttpContextHelper.Current.Request.GetUrlRewriter().ToString() :
                            (Cache.Get<string>("REWRITE_URL" + tenant.TenantId) != null) ?
                            new Uri(Cache.Get<string>("REWRITE_URL" + tenant.TenantId)).ToString() : tenant.GetTenantDomain();
                 var cardDavAB = new CardDavAddressbook();

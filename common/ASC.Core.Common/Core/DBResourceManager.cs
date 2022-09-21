@@ -23,10 +23,10 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Core;
+using ASC.Core.Common;
 
 namespace TMResourceData
 {
@@ -161,7 +161,7 @@ namespace TMResourceData
                 return resourceValue;
             }
 
-            if (HttpContext.Current != null) //if in Notify Service or other process without HttpContext
+            if (HttpContextHelper.Current != null) //if in Notify Service or other process without HttpContext
             {
                 try
                 {

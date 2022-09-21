@@ -16,9 +16,9 @@
 
 
 using System;
-using System.Web;
 
 using ASC.Common.Logging;
+using ASC.Core.Common;
 
 namespace ASC.Core.Common
 {
@@ -34,9 +34,9 @@ namespace ASC.Core.Common
             try
             {
                 var uriBuilder = new UriBuilder(Uri.UriSchemeHttp, LOCALHOST);
-                if (HttpContext.Current != null && HttpContext.Current.Request != null)
+                if (HttpContextHelper.Current != null && HttpContextHelper.Current.Request != null)
                 {
-                    var u = HttpContext.Current.Request.GetUrlRewriter();
+                    var u = HttpContextHelper.Current.Request.GetUrlRewriter();
                     uriBuilder = new UriBuilder(u.Scheme, LOCALHOST, u.Port);
                 }
                 _serverRoot = uriBuilder;
@@ -71,9 +71,9 @@ namespace ASC.Core.Common
                 var result = new UriBuilder(_serverRoot.Uri);
 
                 // first, take from current request
-                if (HttpContext.Current != null && HttpContext.Current.Request != null)
+                if (HttpContextHelper.Current != null && HttpContextHelper.Current.Request != null)
                 {
-                    var u = HttpContext.Current.Request.GetUrlRewriter();
+                    var u = HttpContextHelper.Current.Request.GetUrlRewriter();
                     result = new UriBuilder(u.Scheme, u.Host, u.Port);
 
                     if (CoreContext.Configuration.Standalone && !result.Uri.IsLoopback)

@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web;
+using ASC.Common;
 
 #endregion
 
@@ -40,8 +40,8 @@ namespace ASC.Common.Web
         {
             get
             {
-                if (HttpContext.Current == null) throw new NotSupportedException("Avaliable in web request only.");
-                return new DisposableHttpContext(HttpContext.Current);
+                if (HttpContextHelper.Current == null) throw new NotSupportedException("Avaliable in web request only.");
+                return new DisposableHttpContext(HttpContextHelper.Current);
             }
         }
 

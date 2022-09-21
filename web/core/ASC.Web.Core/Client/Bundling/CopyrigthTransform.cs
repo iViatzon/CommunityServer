@@ -17,7 +17,6 @@
 
 using System;
 using System.Linq;
-using System.Web.Optimization;
 
 using ASC.Web.Core.WhiteLabel;
 

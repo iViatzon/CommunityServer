@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web;
 
 using ASC.FederatedLogin.Helpers;
 using ASC.FederatedLogin.Profile;

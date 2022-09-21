@@ -19,7 +19,6 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 
 using ASC.Core;
 using ASC.Core.Common;
@@ -201,7 +200,7 @@ namespace ASC.Web.Studio.Utility
         {
             var productID = Guid.Empty;
 
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
                 IProduct product;
                 IModule module;
@@ -216,9 +215,9 @@ namespace ASC.Web.Studio.Utility
         {
             var addonID = Guid.Empty;
 
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                var addonName = GetAddonNameFromUrl(HttpContext.Current.Request.Url.AbsoluteUri);
+                var addonName = GetAddonNameFromUrl(HttpContextHelper.Current.Request.Url.AbsoluteUri);
 
                 switch (addonName)
                 {
@@ -241,7 +240,7 @@ namespace ASC.Web.Studio.Utility
 
         public static void GetLocationByRequest(out IProduct currentProduct, out IModule currentModule)
         {
-            GetLocationByRequest(out currentProduct, out currentModule, HttpContext.Current);
+            GetLocationByRequest(out currentProduct, out currentModule, HttpContextHelper.Current);
         }
 
         public static void GetLocationByRequest(out IProduct currentProduct, out IModule currentModule, HttpContext context)
@@ -249,12 +248,12 @@ namespace ASC.Web.Studio.Utility
             var currentURL = string.Empty;
             if (context != null && context.Request != null)
             {
-                currentURL = HttpContext.Current.Request.GetUrlRewriter().AbsoluteUri;
+                currentURL = HttpContextHelper.Current.Request.GetUrlRewriter().AbsoluteUri;
 
                 // http://[hostname]/[virtualpath]/[AjaxPro.Utility.HandlerPath]/[assembly],[classname].ashx
-                if (currentURL.Contains("/" + AjaxPro.Utility.HandlerPath + "/") && HttpContext.Current.Request.UrlReferrer != null)
+                if (currentURL.Contains("/" + AjaxPro.Utility.HandlerPath + "/") && HttpContextHelper.Current.Request.UrlReferrer != null)
                 {
-                    currentURL = HttpContext.Current.Request.UrlReferrer.AbsoluteUri;
+                    currentURL = HttpContextHelper.Current.Request.UrlReferrer.AbsoluteUri;
                 }
             }
 

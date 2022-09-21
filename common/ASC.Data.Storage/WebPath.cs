@@ -22,11 +22,10 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Hosting;
 
 using ASC.Core;
 using ASC.Data.Storage.Configuration;
+using ASC.Data.Storage;
 
 namespace ASC.Data.Storage
 {
@@ -145,10 +144,10 @@ namespace ASC.Data.Storage
             var path = GetPath(relativePath);
             if (!Existing.ContainsKey(path))
             {
-                if (Uri.IsWellFormedUriString(path, UriKind.Relative) && HttpContext.Current != null)
+                if (Uri.IsWellFormedUriString(path, UriKind.Relative) && HttpContextHelper.Current != null)
                 {
                     //Local
-                    Existing[path] = File.Exists(HttpContext.Current.Server.MapPath(path));
+                    Existing[path] = File.Exists(HttpContextHelper.Current.Server.MapPath(path));
                 }
                 if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
                 {

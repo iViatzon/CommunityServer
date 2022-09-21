@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Remoting.Messaging;
-using System.Web;
 
 using ASC.Api;
 using ASC.Api.Attributes;
@@ -30,6 +29,7 @@ using ASC.Core;
 using ASC.Core.Billing;
 using ASC.Core.Tenants;
 using ASC.Web.Core;
+using ASC.Specific;
 
 namespace ASC.Specific.GlobalFilters
 {
@@ -92,7 +92,7 @@ namespace ASC.Specific.GlobalFilters
                         var hostname = string.Empty;
                         try
                         {
-                            hostname = HttpContext.Current.Request.GetUrlRewriter().Host;
+                            hostname = HttpContextHelper.Current.Request.GetUrlRewriter().Host;
                         }
                         catch
                         {

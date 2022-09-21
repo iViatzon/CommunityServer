@@ -18,10 +18,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 
 using ASC.Data.Storage;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Client.Bundling
 {
@@ -74,9 +73,9 @@ namespace ASC.Web.Core.Client.Bundling
         {
             if (Path.GetExtension(path) != ".less" && Path.GetExtension(path) != ".css") return path;
 
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                var filePath = HttpContext.Current.Server.MapPath(path);
+                var filePath = HttpContextHelper.Current.Server.MapPath(path);
                 if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath.Replace(".css", ".min.css").Replace(".less", ".min.css")))
                 {
                     path = path.Replace(".css", ".min.css").Replace(".less", ".min.css");

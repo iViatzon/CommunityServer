@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
-using System.Web;
 
 using ASC.Common.Data.AdoProxy;
 using ASC.Common.Data.Sql;
@@ -28,6 +27,7 @@ using ASC.Common.Logging;
 using ASC.Common.Web;
 
 using LogManager = ASC.Common.Logging.BaseLogManager;
+using ASC.Common;
 
 namespace ASC.Common.Data
 {
@@ -120,7 +120,7 @@ namespace ASC.Common.Data
 
         public static IDbManager FromHttpContext(string databaseId, int? commandTimeout = null)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
                 var dbManager = DisposableHttpContext.Current[databaseId] as DbManager;
                 if (dbManager == null || dbManager.disposed)
@@ -294,7 +294,7 @@ namespace ASC.Common.Data
 
         public void Dispose()
         {
-            if (HttpContext.Current == null)
+            if (HttpContextHelper.Current == null)
             {
                 dbManager.Dispose();
             }

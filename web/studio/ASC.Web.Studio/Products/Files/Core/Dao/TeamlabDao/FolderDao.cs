@@ -35,6 +35,7 @@ using ASC.Web.Files.Resources;
 using ASC.Web.Studio.Core;
 
 using Newtonsoft.Json.Linq;
+using ASC.Web.Files;
 
 
 namespace ASC.Files.Core.Data
@@ -825,7 +826,7 @@ namespace ASC.Files.Core.Data
 
         private String GetProjectTitle(object folderID)
         {
-            if (HttpContext.Current == null || !SecurityContext.IsAuthenticated)
+            if (HttpContextHelper.Current == null || !SecurityContext.IsAuthenticated)
                 return string.Empty;
 
             if (!ApiServer.Available)

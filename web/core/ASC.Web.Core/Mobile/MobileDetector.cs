@@ -18,9 +18,9 @@
 using System;
 using System.Configuration;
 using System.Text.RegularExpressions;
-using System.Web;
 
 using ASC.Common.Caching;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Mobile
 {
@@ -49,7 +49,7 @@ namespace ASC.Web.Core.Mobile
         public static bool IsRequestMatchesMobile()
         {
             bool? result = false;
-            var ua = HttpContext.Current.Request.UserAgent;
+            var ua = HttpContextHelper.Current.Request.UserAgent;
             var regex = uaMobileRegex;
             if (!string.IsNullOrEmpty(ua) && regex != null)
             {

@@ -18,8 +18,6 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
-using System.Web.Script.Serialization;
 
 using ASC.Security.Cryptography;
 

@@ -18,11 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Web;
 
 using ASC.Core.Common.Configuration;
 using ASC.FederatedLogin.Helpers;
 using ASC.FederatedLogin.Profile;
+using ASC.FederatedLogin;
 
 namespace ASC.FederatedLogin.LoginProviders
 {
@@ -96,7 +96,7 @@ namespace ASC.FederatedLogin.LoginProviders
             var code = context.Request["code"];
             if (string.IsNullOrEmpty(code))
             {
-                OAuth20TokenHelper.RequestCode<T>(HttpContext.Current, scopes, additionalArgs);
+                OAuth20TokenHelper.RequestCode<T>(HttpContextHelper.Current, scopes, additionalArgs);
                 return null;
             }
 

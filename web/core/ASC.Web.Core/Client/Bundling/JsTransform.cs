@@ -16,7 +16,6 @@
 
 
 using System.Text;
-using System.Web.Optimization;
 
 using ASC.Web.Core.Client.HttpHandlers;
 

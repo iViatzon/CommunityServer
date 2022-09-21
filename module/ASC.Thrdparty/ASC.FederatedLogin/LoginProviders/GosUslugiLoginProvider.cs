@@ -22,7 +22,6 @@ using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
-using System.Web;
 
 using ASC.FederatedLogin.Helpers;
 using ASC.FederatedLogin.Profile;
@@ -33,6 +32,7 @@ using JWT.Builder;
 using JWT.Serializers;
 
 using Newtonsoft.Json.Linq;
+using ASC.FederatedLogin;
 
 namespace ASC.FederatedLogin.LoginProviders
 {
@@ -126,7 +126,7 @@ namespace ASC.FederatedLogin.LoginProviders
             var code = context.Request["code"];
             if (string.IsNullOrEmpty(code))
             {
-                RequestCode(HttpContext.Current, scopes);
+                RequestCode(HttpContextHelper.Current, scopes);
                 return null;
             }
             var state = context.Request["state"];

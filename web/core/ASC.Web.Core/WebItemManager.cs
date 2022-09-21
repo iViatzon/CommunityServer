@@ -21,11 +21,11 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 
 using ASC.Common.Logging;
 using ASC.Web.Core.Utility;
 using ASC.Web.Core.WebZones;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core
 {
@@ -244,9 +244,9 @@ namespace ASC.Web.Core
         private IEnumerable<string> GetFiles()
         {
             const string pattern = "ASC.Web.*.dll";
-            if (HttpContext.Current != null)
+            if (HttpContextHelper.Current != null)
             {
-                return Directory.GetFiles(HttpContext.Current.Server.MapPath("~/bin"), pattern);
+                return Directory.GetFiles(HttpContextHelper.Current.Server.MapPath("~/bin"), pattern);
             }
             return Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), pattern);
         }

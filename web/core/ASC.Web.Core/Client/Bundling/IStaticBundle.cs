@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 
 using ASC.Web.Core.Client.HttpHandlers;
+using ASC.Web.Core;
 
 namespace ASC.Web.Core.Client.Bundling
 {
@@ -91,9 +91,9 @@ namespace ASC.Web.Core.Client.Bundling
             if (!string.IsNullOrEmpty(category)) return category;
 
             category = "common";
-            if (HttpContext.Current != null && HttpContext.Current.Request.Url != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Url.AbsolutePath))
+            if (HttpContextHelper.Current != null && HttpContextHelper.Current.Request.Url != null && !string.IsNullOrEmpty(HttpContextHelper.Current.Request.Url.AbsolutePath))
             {
-                var matches = Regex.Match(HttpContext.Current.Request.Url.AbsolutePath, "(products|addons)/(\\w+)/?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var matches = Regex.Match(HttpContextHelper.Current.Request.Url.AbsolutePath, "(products|addons)/(\\w+)/?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 if (matches.Success && 2 < matches.Groups.Count && matches.Groups[2].Success)
                 {
                     category = matches.Groups[2].Value;
