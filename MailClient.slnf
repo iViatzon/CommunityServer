@@ -2,6 +2,7 @@
   "solution": {
     "path": "Studio.sln",
     "projects": [
+      "TestClient\\TestClient.csproj",
       "common\\ASC.ActiveDirectory\\ASC.ActiveDirectory.csproj",
       "common\\ASC.Common\\ASC.Common.csproj",
       "common\\ASC.Core.Common\\ASC.Core.Common.csproj",
